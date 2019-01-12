@@ -11,6 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('home');
+Route::resource('appointments', 'AppointmentController');
+Route::resource('clients', 'ClientController');
+Route::resource('coupons', 'CouponController');
+Route::resource('premiums', 'PremiumController');
+Route::resource('rewards', 'RewardController');
+Route::resource('services', 'ServiceController');
+Route::resource('users', 'UserController');
+Route::resource('wallets', 'WalletController');
