@@ -82,7 +82,13 @@
 	<script src="{{ asset('js/paper-dashboard.js') }}"></script>
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="{{ asset('js/demo.js') }}"></script>
+    <script src="{{ asset('js/demo.js') }}"></script>
+    
+    <!-- SweetAlert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <!-- Include this after the sweet alert js file -->
+    @include('sweet::alert')
 
 
 </html>
