@@ -19,13 +19,13 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Nome</label>
-                                        <input type="text" class="form-control border-input" name="nome" value="{{ old('nome')}}" autofocus required>
+                                        <input type="text" minLength="3" maxlength="255" class="form-control border-input  {{ $errors->has('nome') ? 'is-invalid' : '' }}" name="nome" value="{{ old('nome')}}" autofocus required>
                                     </div>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label>Sobrenome</label>
-                                        <input type="text" class="form-control border-input" name="sobrenome" value="{{ old('sobrenome')}}" required>
+                                        <input type="text" minLength="3" maxlength="255" class="form-control border-input  {{ $errors->has('sobrenome') ? 'is-invalid' : '' }}" name="sobrenome" value="{{ old('sobrenome')}}" required>
                                     </div>
                                 </div>
                             </div>
@@ -33,13 +33,13 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label>Endereço</label>
-                                        <input type="text" class="form-control border-input" name="endereco" value="{{ old('endereco')}}">
+                                        <input type="text" maxlength="255" class="form-control border-input  {{ $errors->has('endereco') ? 'is-invalid' : '' }}" name="endereco" value="{{ old('endereco')}}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Complemento</label>
-                                        <input type="text" class="form-control border-input" name="complemento" value="{{ old('complemento')}}">
+                                        <input type="text" maxlength="255" class="form-control border-input  {{ $errors->has('complemento') ? 'is-invalid' : '' }}" name="complemento" value="{{ old('complemento')}}">
                                     </div>
                                 </div>
                             </div>
@@ -48,19 +48,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Edifício</label>
-                                        <input type="text" class="form-control border-input" name="edificio" value="{{ old('edificio')}}">
+                                        <input type="text" maxlength="255" class="form-control border-input  {{ $errors->has('edificio') ? 'is-invalid' : '' }}" name="edificio" value="{{ old('edificio')}}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Bairro</label>
-                                        <input type="text" class="form-control border-input" name="bairro" value="{{ old('bairro')}}">
+                                        <input type="text" maxlength="255" class="form-control border-input  {{ $errors->has('bairro') ? 'is-invalid' : '' }}" name="bairro" value="{{ old('bairro')}}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Cidade</label>
-                                        <input type="text" class="form-control border-input" name="cidade" value="{{ old('cidade')}}">
+                                        <input type="text" maxlength="255" class="form-control border-input  {{ $errors->has('cidade') ? 'is-invalid' : '' }}" name="cidade" value="{{ old('cidade')}}">
                                     </div>
                                 </div>
                             </div>
@@ -69,19 +69,19 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>CEP</label>
-                                        <input type="number" min="8" max="8" class="form-control border-input" name="cep" value="{{ old('cep')}}">
+                                        <input type="number" minLength="8" maxlength="8" class="form-control border-input  {{ $errors->has('cep') ? 'is-invalid' : '' }}" name="cep" value="{{ old('cep')}}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Estado</label>
-                                        <input type="text" class="form-control border-input" name="estado" value="{{ old('estado')}}">
+                                        <input type="text" maxlength="50" class="form-control border-input  {{ $errors->has('estado') ? 'is-invalid' : '' }}" name="estado" value="{{ old('estado')}}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Data de Nascimento</label>
-                                        <input type="date" class="form-control border-input" name="data_nascimento" value="{{ old('data_nascimento')}}">
+                                        <input type="date" maxlength="10" class="form-control border-input  {{ $errors->has('data_nascimento') ? 'is-invalid' : '' }}" name="data_nascimento" value="{{ old('data_nascimento')}}">
                                     </div>
                                 </div>
                             </div>
@@ -90,16 +90,16 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Email</label>
-                                        <input type="email" class="form-control border-input" name="email" value="{{ old('email')}}">
+                                        <input type="email" maxlength="255" class="form-control border-input  {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email" value="{{ old('email')}}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Situação</label>
-                                        <select class="form-control" name="status">
+                                        <select class="form-control border-input {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" required>
                                             <option value="" hidden>Selecionar</option>
-                                            <option value="1">Ativo</option>
-                                            <option value="0">Inativo</option>
+                                            <option value="1" @if(old('status') == '1') selected @endif>Ativo</option>
+                                            <option value="0" @if(old('status') == '0') selected @endif>Inativo</option>
                                         </select>
                                     </div>
                                 </div>
@@ -112,42 +112,43 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Residencial</label>
-                                        <input type="tel" class="form-control border-input" name="telefone_fixo" value="{{ old('telefone_fixo')}}">
+                                        <input type="tel" maxlength="11" class="form-control border-input {{ $errors->has('telefone_fixo') ? 'is-invalid' : '' }}" name="telefone_fixo" value="{{ old('telefone_fixo')}}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Celular/WhatsApp</label>
-                                        <input type="tel" class="form-control border-input" name="telefone_celular" value="{{ old('telefone_celular')}}">
+                                        <input type="tel" maxlength="11" class="form-control border-input {{ $errors->has('telefone_celular') ? 'is-invalid' : '' }}" name="telefone_celular" value="{{ old('telefone_celular')}}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Comercial</label>
-                                        <input type="tel" class="form-control border-input" name="telefone_comercial" value="{{ old('telefone_comercial')}}">
+                                        <input type="tel" maxlength="11" class="form-control border-input {{ $errors->has('telefone_comercial') ? 'is-invalid' : '' }}" name="telefone_comercial" value="{{ old('telefone_comercial')}}">
                                     </div>
                                 </div>
                             </div>
                             <hr>
+
                             <h4 class="title">Documentação</h4>
                             <br>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>CPF</label>
-                                        <input type="number" class="form-control border-input" name="cpf" value="{{ old('cpf')}}">
+                                        <input type="number" maxlength="11" class="form-control border-input {{ $errors->has('cpf') ? 'is-invalid' : '' }}" name="cpf" value="{{ old('cpf')}}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>RG</label>
-                                        <input type="number" class="form-control border-input" name="rg" value="{{ old('rg')}}">
+                                        <input type="number" maxlength="11" class="form-control border-input {{ $errors->has('rg') ? 'is-invalid' : '' }}" name="rg" value="{{ old('rg')}}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Órgão Expedidor</label>
-                                        <input type="text" class="form-control border-input" name="orgao" value="{{ old('orgao')}}">
+                                        <input type="text" maxlength="10" class="form-control border-input {{ $errors->has('orgao') ? 'is-invalid' : '' }}" name="orgao" value="{{ old('orgao')}}">
                                     </div>
                                 </div>
                             </div>
@@ -157,7 +158,7 @@
                                 </a>
                             </div>
                             <div class="pull-right">
-                                <button type="submit" class="btn btn-danger btn-fill btn-wd">Cadastrar Cliente <i class="fa fa-check"></i></button>
+                                <button type="submit" class="btn btn-danger btn-fill btn-wd">Cadastrar <i class="fa fa-check"></i></button>
                             </div>
                             <div class="clearfix"></div>
                         </form>

@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Lucas Ferreira',
             'email' => 'lucasferreiras@live.com',
             'password' => bcrypt('secret'),
+            'remember_token' => str_random(10),
         ]);
 	}
 }

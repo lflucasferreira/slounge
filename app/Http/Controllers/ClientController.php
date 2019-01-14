@@ -25,8 +25,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
-        return view('clients.index', compact('clients'));
+        $clients = Client::paginate(10);
+        $clients_total = Client::count();
+        return view('clients.index', compact('clients', 'clients_total'));
     }
 
     /**
@@ -47,7 +48,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $attributes = $this->validar();
+        $attributes = $this->validation();
         $request = Client::create($attributes);
         Alert::success('Cliente cadastrado com sucesso!');
         return redirect('/clients');
@@ -84,7 +85,7 @@ class ClientController extends Controller
      */
     public function update(Client $client)
     {
-        $client->update($this->validar());
+        $client->update($this->validation());
         Alert::success('Cliente atualizado com sucesso!');
         return redirect()->route('clients.show', $client->id);
     }
@@ -102,7 +103,7 @@ class ClientController extends Controller
         return redirect('/clients');
     }
 
-    public function validar()
+    public function validation()
     {
         return request()->validate([
             'nome' => ['required', 'min:3', 'max:255'],

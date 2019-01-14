@@ -10,17 +10,19 @@
                 <div class="card">
                     <div class="content">
                         <div class="row">
-                            <div class="col-xs-5">
-                                <div class="icon-big icon-warning text-center">
-                                    <i class="ti-crown"></i>
+                            <a href="{{ route('clients.index')}}" style="color: #000;text-decoration: none;">
+                                <div class="col-xs-5">
+                                    <div class="icon-big icon-warning text-center">
+                                        <i class="ti-crown"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-xs-7">
-                                <div class="numbers">
-                                    <p>Clientes</p>
-                                    12
+                                <div class="col-xs-7">
+                                    <div class="numbers">
+                                        <p>Clientes</p>
+                                        {{ $clients }}
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                         <div class="footer">
                             <hr>
@@ -35,17 +37,19 @@
                 <div class="card">
                     <div class="content">
                         <div class="row">
-                            <div class="col-xs-5">
-                                <div class="icon-big icon-success text-center">
-                                    <i class="ti-wallet"></i>
+                            <a href="{{ route('wallets.index')}}" style="color: #000;text-decoration: none;">
+                                <div class="col-xs-5">
+                                    <div class="icon-big icon-success text-center">
+                                        <i class="ti-wallet"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-xs-7">
-                                <div class="numbers">
-                                    <p>Financeiro</p>
-                                    R$ 150
+                                <div class="col-xs-7">
+                                    <div class="numbers">
+                                        <p>Financeiro</p>
+                                        R$ 150
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                         <div class="footer">
                             <hr>
@@ -60,17 +64,19 @@
                 <div class="card">
                     <div class="content">
                         <div class="row">
-                            <div class="col-xs-5">
-                                <div class="icon-big icon-danger text-center">
-                                    <i class="ti-calendar"></i>
+                            <a href="{{ route('appointments.index')}}" style="color: #000;text-decoration: none;">
+                                <div class="col-xs-5">
+                                    <div class="icon-big icon-danger text-center">
+                                        <i class="ti-calendar"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-xs-7">
-                                <div class="numbers">
-                                    <p>Agenda</p>
-                                    2
+                                <div class="col-xs-7">
+                                    <div class="numbers">
+                                        <p>Agenda</p>
+                                        {{ $appointments }}
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                         <div class="footer">
                             <hr>
@@ -85,17 +91,19 @@
                 <div class="card">
                     <div class="content">
                         <div class="row">
-                            <div class="col-xs-5">
-                                <div class="icon-big icon-info text-center">
-                                    <i class="ti-cup"></i>
+                            <a href="{{ route('rewards.index')}}" style="color: #000;text-decoration: none;">
+                                <div class="col-xs-5">
+                                    <div class="icon-big icon-info text-center">
+                                        <i class="ti-cup"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-xs-7">
-                                <div class="numbers">
-                                    <p>Pontuação</p>
-                                    +350
+                                <div class="col-xs-7">
+                                    <div class="numbers">
+                                        <p>Pontuação</p>
+                                        +350
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                         <div class="footer">
                             <hr>

@@ -12,10 +12,10 @@
                         <div class="pull-left">
                             <h4 class="title">Clientes Ativos</h4>
                             <p class="category">   
-                                @if ($clients->count() > 1) 
-                                    Total de {{ $clients->count() }} clientes 
-                                @elseif ($clients->count() === 1) 
-                                    Total de {{ $clients->count() }} cliente  
+                                @if ($clients_total > 1) 
+                                    Total de {{ $clients_total }} clientes 
+                                @elseif ($clients_total === 1) 
+                                    Total de {{ $clients_total }} cliente  
                                 @else 
                                     Nenhum cliente ainda 
                                 @endif
@@ -23,27 +23,29 @@
                         </div>
                         <div class="pull-right">
                             <a href="{{ route('clients.create') }}" class="btn btn-danger dim btn-outline" type="button">
-                                <i class="fa fa-plus"></i> Novo Cliente 
+                                Adicionar <i class="fa fa-plus"></i>
                             </a>
                         </div>
                     </div>
                     <div class="content table-responsive table-full-width">
                         <table class="table table-striped">
                             <thead>
-                                <tr><th>ID</th>
-                                <th>Nome</th>
-                                <th>Email</th>
-                                <th>Bairro</th>
-                                <th>Telefone</th>
-                                <th>Ações</th>
-                            </tr></thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Cidade</th>
+                                    <th>Telefone</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
                             <tbody>
                                 @foreach($clients as $client)
                                 <tr>
                                     <td>{{ $client->id }}</td>
                                     <td>{{ $client->nome }} {{ $client->sobrenome }}</td>
                                     <td>{{ $client->email }}</td>
-                                    <td>{{ $client->bairro }}</td>
+                                    <td>{{ $client->cidade }}</td>
                                     <td>{{ $client->telefone_celular }}</td>
                                     <td>
                                         <a href="/clients/{{ $client->id }}" class="btn btn-primary" type="button" title="Visualizar">
@@ -55,6 +57,9 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="row text-center">
+                    {{ $clients->links() }}
                 </div>
             </div>
         </div>

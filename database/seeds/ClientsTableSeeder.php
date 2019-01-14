@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Faker\Factory as Faker;
+use App\Models\Client;
 
 class ClientsTableSeeder extends Seeder
 {
@@ -11,15 +11,7 @@ class ClientsTableSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
-        $faker = Faker::create();
-    	foreach (range(1,20) as $index) {
-	        DB::table('clients')->insert([
-                'nome' => $faker->firstName,
-                'sobrenome' => $faker->lastName,
-                'email' => $faker->email,
-                'bairro' => $faker->city,
-	        ]);
-	}
+    {   
+        factory(Client::class, 200)->create();
     }
 }

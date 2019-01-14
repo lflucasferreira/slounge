@@ -70,7 +70,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>CEP</label>
-                                        <input type="text" maxlength="8" class="form-control border-input {{ $errors->has('cep') ? 'is-invalid' : '' }}" name="cep" value="{{ $client->cep }}">
+                                        <input type="text" minLength="8" maxlength="8" class="form-control border-input {{ $errors->has('cep') ? 'is-invalid' : '' }}" name="cep" value="{{ $client->cep }}">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -82,7 +82,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Data de Nascimento</label>
-                                        <input type="date" class="form-control border-input {{ $errors->has('data_nascimento') ? 'is-invalid' : '' }}" name="data_nascimento" value="{{ $client->data_nascimento }}">
+                                        <input type="date" maxlength="10" class="form-control border-input {{ $errors->has('data_nascimento') ? 'is-invalid' : '' }}" name="data_nascimento" value="{{ $client->data_nascimento }}">
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Situação</label>
-                                        <select class="form-control border-input {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" >
+                                        <select class="form-control border-input {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" required>
                                             <option value="" hidden>Selecionar</option>
                                             <option value="1" @if(old('status', $client->status) == '1') selected @endif>Ativo</option>
                                             <option value="0" @if(old('status', $client->status) == '0') selected @endif>Inativo</option>
@@ -130,6 +130,7 @@
                                 </div>
                             </div>
                             <hr>
+                            
                             <h4 class="title">Documentação</h4>
                             <br>
                             <div class="row">

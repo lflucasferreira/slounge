@@ -15,6 +15,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::resource('appointments', 'AppointmentController');
+Route::resource('categories', 'CategoryController');
 Route::resource('clients', 'ClientController');
 Route::resource('coupons', 'CouponController');
 Route::resource('premiums', 'PremiumController');
