@@ -14,7 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::paginate(10);
+        $categories_total = Category::count();
+        return view('categories.index', compact('categories', 'categories_total'));
     }
 
     /**

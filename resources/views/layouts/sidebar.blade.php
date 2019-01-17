@@ -31,6 +31,12 @@
                     <p>Agenda</p>
                 </a>
             </li>
+            <li class="{{ isActiveRoute('categories.index') }}">
+                <a href="{{ url('/categories') }}">
+                    <i class="ti-tag"></i>
+                    <p>Categorias</p>
+                </a>
+            </li>
             <li class="{{ isActiveRoute('clients.index') }}">
                 <a href="{{ url('/clients') }}">
                     <i class="ti-crown"></i>
