@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\Service;
+use Illuminate\Database\Seeder;
 
 class ServicesTableSeeder extends Seeder
 {
@@ -12,6 +12,6 @@ class ServicesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Service::class, 200)->create();
+        factory(Service::class, 20)->create();
     }
 }

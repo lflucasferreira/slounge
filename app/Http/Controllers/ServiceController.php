@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Alert;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
@@ -34,7 +35,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        return view('services.create');
     }
 
     /**
@@ -45,7 +46,10 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = $this->validation();
+        $request = Service::create($attributes);
+        Alert::success('Serviço cadastrado com sucesso!');
+        return redirect('/services');
     }
 
     /**
@@ -56,7 +60,7 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        //
+        return view('services.show', compact('service'));
     }
 
     /**
@@ -67,7 +71,7 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        //
+        return view('services.edit', compact('service'));
     }
 
     /**
@@ -77,9 +81,11 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Service $service)
+    public function update(Service $service)
     {
-        //
+        $service->update($this->validation());
+        Alert::success('Serviço atualizado com sucesso!');
+        return redirect()->route('services.show', $service->id);
     }
 
     /**
@@ -90,6 +96,15 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        $service->delete();
+        Alert::success('Serviço excluído com sucesso!');
+        return redirect('/services');
+    }
+
+    public function validation()
+    {
+        return request()->validate([
+            'descricao' => ['required', 'min:3', 'max:50']
+        ]);
     }
 }
