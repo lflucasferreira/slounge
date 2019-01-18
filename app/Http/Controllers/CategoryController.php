@@ -9,6 +9,16 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -96,7 +106,8 @@ class CategoryController extends Controller
     public function validation()
     {
         return request()->validate([
-            'nome' => ['required', 'min:3', 'max:255']
+            'nome' => ['required', 'unique:categories', 'min:3', 'max:255'],
+            'status' => ['required']
         ]);
     }
 }

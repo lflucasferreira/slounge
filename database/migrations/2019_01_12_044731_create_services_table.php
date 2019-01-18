@@ -17,12 +17,12 @@ class CreateServicesTable extends Migration
             $table->increments('id');
             $table->string('nome');
             $table->text('descricao');
-            $table->string('preco');
-            $table->time('duracao');
-            $table->datetime('inicio');
+            $table->string('preco')->nullable();
+            $table->time('duracao')->nullable();
+            $table->datetime('inicio')->nullable();
             $table->datetime('fim')->nullable();
             $table->unsignedInteger('user_id')->nullable();
-            //$table->unsignedInteger('category_id');
+            $table->unsignedInteger('category_id')->nullable();
             $table->timestamps();
         });
     }

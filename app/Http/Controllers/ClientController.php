@@ -116,12 +116,12 @@ class ClientController extends Controller
             'cep' => ['nullable', 'max:255'],
             'estado' => ['nullable', 'max:255'],
             'data_nascimento' => ['nullable', 'max:10'],
-            'email' => ['nullable', 'max:255'],
+            'email' => ['nullable', 'unique:clients', 'max:255'],
             'status' => ['nullable', 'max:1'],
             'telefone_fixo' => ['nullable', 'max:11'],
             'telefone_celular' => ['nullable', 'max:11'],
             'telefone_comercial' => ['nullable', 'max:11'],
-            'cpf' => ['nullable', 'max:11'],
+            'cpf' => ['nullable', 'unique:clients', 'max:11'],
             'rg' => ['nullable', 'max:10'],
             'orgao' => ['nullable', 'max:10']
         ]);

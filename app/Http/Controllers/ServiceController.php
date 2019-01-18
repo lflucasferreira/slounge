@@ -25,7 +25,9 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return view('services.index');
+        $services = Service::paginate(10);
+        $services_total = Service::count();
+        return view('services.index', compact('services', 'services_total'));
     }
 
     /**
@@ -104,7 +106,14 @@ class ServiceController extends Controller
     public function validation()
     {
         return request()->validate([
-            'descricao' => ['required', 'min:3', 'max:50']
+            'nome' => ['required', 'min:3', 'max:50'],
+            'descricao' => ['required', 'min:3', 'max:50'],
+            'preco' => ['nullable'],
+            'duracao' => ['nullable'],
+            'inicio' => ['nullable'],
+            'fim' => ['nullable'],
+            'user_id' => ['nullable'],
+            'category_id' => ['nullable']
         ]);
     }
 }

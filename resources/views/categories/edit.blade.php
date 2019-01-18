@@ -9,7 +9,7 @@
             <div class="col-lg-12 col-md-7">
                 <div class="card">
                     <div class="header">
-                        <h4 class="title">Categoria</h4>
+                        <h4 class="title">Informações da Categoria</h4>
                         @include('errors')
                     </div>
                     <div class="content">
@@ -21,6 +21,16 @@
                                     <div class="form-group">
                                         <label>Nome</label>
                                         <input type="text" maxlength="255" class="form-control border-input {{ $errors->has('nome') ? 'is-invalid' : '' }}" name="nome" value="{{ $category->nome }}" autofocus required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Situação</label>
+                                        <select class="form-control border-input {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" required>
+                                            <option value="" hidden>Selecionar</option>
+                                            <option value="1" @if(old('status', $category->status) == '1') selected @endif>Ativo</option>
+                                            <option value="0" @if(old('status', $category->status) == '0') selected @endif>Inativo</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

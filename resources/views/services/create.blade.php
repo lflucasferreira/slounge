@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="col-md-8">
                                     <div class="form-group">
-                                        <label>Sobrenome</label>
+                                        <label>Descrição</label>
                                         <input type="text" minLength="3" maxlength="255" class="form-control border-input  {{ $errors->has('sobrenome') ? 'is-invalid' : '' }}" name="sobrenome" value="{{ old('sobrenome')}}" required>
                                     </div>
                                 </div>

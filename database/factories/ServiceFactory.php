@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Models\Category;
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Service::class, function (Faker $faker) {
@@ -12,6 +13,9 @@ $factory->define(App\Models\Service::class, function (Faker $faker) {
         'inicio' => $faker->dateTime($max = 'now', $timezone = null),
         'user_id' => function () {
             return factory(User::class)->create()->id;
+        },
+        'category_id' => function () {
+            return factory(Category::class)->create()->id;
         }
     ];
 });

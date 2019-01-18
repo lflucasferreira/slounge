@@ -24,10 +24,10 @@ class CreateClientsTable extends Migration
             $table->string('cidade')->nullable();
             $table->string('cep')->nullable();
             $table->string('estado')->nullable();
-            $table->string('cpf')->nullable();
+            $table->string('cpf')->nullable()->unique();
             $table->string('rg')->nullable();
             $table->string('orgao')->nullable();
-            $table->string('email')->nullable();
+            $table->string('email')->nullable()->unique();
             $table->string('telefone_fixo')->nullable();
             $table->string('telefone_celular')->nullable();
             $table->string('telefone_comercial')->nullable();
