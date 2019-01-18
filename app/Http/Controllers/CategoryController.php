@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Alert;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -37,7 +38,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = $this->validation();
+        $request = Category::create($attributes);
+        Alert::success('Categoria cadastrada com sucesso!');
+        return redirect('/categories');
     }
 
     /**
@@ -48,7 +52,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return view('categories.show', compact('category'));
     }
 
     /**
@@ -59,7 +63,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -69,9 +73,11 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Category $category)
     {
-        //
+        $category->update($this->validation());
+        Alert::success('Categoria atualizada com sucesso!');
+        return redirect()->route('categories.show', $category->id);
     }
 
     /**
@@ -82,6 +88,15 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        Alert::success('Categoria excluída com sucesso!');
+        return redirect('/categories');
+    }
+
+    public function validation()
+    {
+        return request()->validate([
+            'nome' => ['required', 'min:3', 'max:255']
+        ]);
     }
 }
