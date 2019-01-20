@@ -27,7 +27,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::paginate(10);
+        $services = Service::orderBy('nome')->paginate(10);
         $services_total = Service::count();
         return view('services.index', compact('services', 'services_total'));
     }

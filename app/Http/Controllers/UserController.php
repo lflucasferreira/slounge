@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Alert;
 use App\Models\User;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -25,7 +26,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10);
+        $users = User::orderBy('name')->paginate(10);
         $users_total = User::count();
         return view('users.index', compact('users', 'users_total'));
     }
@@ -99,9 +100,14 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
-        Alert::success('Usuário excluído com sucesso!');
-        return redirect('/users');
+        if(Service::where('user_id', '=', $user->id)->first()){
+            Alert::error('Usuário não pôde ser excluído!');
+            return redirect()->route('users.show', $user->id);
+        } else {
+            $user->delete();
+            Alert::success('Usuário excluído com sucesso!');
+            return redirect('/users');
+        }
     }
 
     public function validation()

@@ -27,8 +27,8 @@
                                         <label>Situação</label>
                                         <select class="form-control border-input" name="status" disabled>
                                             <option value="" hidden>Selecionar</option>
-                                            <option value="1" @if(old('status', $category->status) == '1') selected @endif>Ativo</option>
-                                            <option value="0" @if(old('status', $category->status) == '0') selected @endif>Inativo</option>
+                                            <option value="1" @if(old('status', $category->status) == '1') selected @endif>Ativa</option>
+                                            <option value="0" @if(old('status', $category->status) == '0') selected @endif>Inativa</option>
                                         </select>
                                     </div>
                                 </div>

@@ -31,7 +31,6 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Nome</th>
                                     <th>Email</th>
                                     <th>Cidade</th>
@@ -42,7 +41,6 @@
                             <tbody>
                                 @foreach($clients as $client)
                                 <tr>
-                                    <td>{{ $client->id }}</td>
                                     <td>{{ $client->nome }} {{ $client->sobrenome }}</td>
                                     <td>{{ $client->email }}</td>
                                     <td>{{ $client->cidade }}</td>

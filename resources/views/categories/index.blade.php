@@ -31,16 +31,16 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Nome</th>
+                                    <th>Situação</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($categories as $category)
                                 <tr>
-                                    <td>{{ $category->id }}</td>
                                     <td>{{ $category->nome }}</td>
+                                    <td>{{ $category->status === 1 ? 'Ativa' : 'Inativa' }}</td>
                                     <td>
                                         <a href="/categories/{{ $category->id }}" class="btn btn-primary" type="button" title="Visualizar">
                                             <i class="fa fa-eye"></i> 

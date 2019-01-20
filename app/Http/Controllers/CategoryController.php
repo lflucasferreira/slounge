@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Alert;
 use App\Models\Category;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -25,7 +26,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(10);
+        $categories = Category::orderBy('nome')->paginate(10);
         $categories_total = Category::count();
         return view('categories.index', compact('categories', 'categories_total'));
     }
@@ -98,9 +99,15 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->delete();
-        Alert::success('Categoria excluída com sucesso!');
-        return redirect('/categories');
+        
+        if(Service::where('category_id', '=', $category->id)->first()){
+            Alert::error('Categoria não pôde ser excluída!');
+            return redirect()->route('categories.show', $category->id);
+        } else {
+            $category->delete();
+            Alert::success('Categoria excluída com sucesso!');
+            return redirect('/categories');
+        }
     }
 
     public function validation()

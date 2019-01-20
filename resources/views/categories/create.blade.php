@@ -27,8 +27,8 @@
                                         <label>Situação</label>
                                         <select class="form-control border-input {{ $errors->has('status') ? 'is-invalid' : '' }}" name="status" required>
                                             <option value="" hidden>Selecionar</option>
-                                            <option value="1" @if(old('status') == '1') selected @endif>Ativo</option>
-                                            <option value="0" @if(old('status') == '0') selected @endif>Inativo</option>
+                                            <option value="1" @if(old('status') == '1') selected @endif>Ativa</option>
+                                            <option value="0" @if(old('status') == '0') selected @endif>Inativa</option>
                                         </select>
                                     </div>
                                 </div>

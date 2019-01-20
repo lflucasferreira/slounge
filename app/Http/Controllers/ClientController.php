@@ -25,7 +25,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::paginate(10);
+        $clients = Client::orderBy('nome')->paginate(10);
         $clients_total = Client::count();
         return view('clients.index', compact('clients', 'clients_total'));
     }
