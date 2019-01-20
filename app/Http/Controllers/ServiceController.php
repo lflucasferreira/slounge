@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Alert;
+use App\Models\Category;
 use App\Models\Service;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -37,7 +39,9 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        return view('services.create');
+        $users = User::orderBy('name')->get();
+        $categories = Category::orderBy('nome')->get();
+        return view('services.create', compact('categories', 'users'));
     }
 
     /**
@@ -73,7 +77,9 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        return view('services.edit', compact('service'));
+        $users = User::orderBy('name')->get();
+        $categories = Category::orderBy('nome')->get();
+        return view('services.edit', compact('categories', 'service', 'users'));
     }
 
     /**
@@ -106,14 +112,15 @@ class ServiceController extends Controller
     public function validation()
     {
         return request()->validate([
+            'sku' => ['nullable'],
             'nome' => ['required', 'min:3', 'max:50'],
-            'descricao' => ['required', 'min:3', 'max:50'],
+            'descricao' => ['nullable', 'min:3', 'max:50'],
             'preco' => ['nullable'],
             'duracao' => ['nullable'],
             'inicio' => ['nullable'],
             'fim' => ['nullable'],
-            'user_id' => ['nullable'],
-            'category_id' => ['nullable']
+            'user_id' => ['required'],
+            'category_id' => ['required']
         ]);
     }
 }

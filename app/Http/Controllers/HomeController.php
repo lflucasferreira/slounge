@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Appointment;
+use App\Models\Category;
+use App\Models\Coupon;
+use App\Models\Wallet;
+use App\Models\Reward;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -26,7 +31,12 @@ class HomeController extends Controller
     public function index()
     {
         $appointments = Appointment::count();
+        $categories = Category::count();
         $clients = Client::count();
-        return view('home', compact('appointments', 'clients'));
+        $coupons = Coupon::count();
+        $rewards = Reward::count();
+        $users = User::count();
+        $wallets = Wallet::count();
+        return view('home', compact('appointments', 'categories', 'clients', 'coupons', 'rewards', 'users', 'wallets'));
     }
 }

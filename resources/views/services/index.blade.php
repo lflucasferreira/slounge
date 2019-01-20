@@ -33,22 +33,23 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nome</th>
-                                    <th>Preço</th>
-                                    <th>Duração</th>
                                     <th>Categoria</th>
                                     <th>Usuário</th>
+                                    <th>Preço</th>
+                                    <th>Duração</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                
                                 @foreach($services as $service)
                                 <tr>
                                     <td>{{ $service->id }}</td>
                                     <td>{{ $service->nome }}</td>
-                                    <td>{{ $service->preco }}</td>
+                                    <td>{{ $service->category->nome }}</td>
+                                    <td>{{ $service->user->name }}</td>
+                                    <td>R$ {{ $service->preco }}</td>
                                     <td>{{ $service->duracao }}</td>
-                                    <td>{{ $service->category_id }}</td>
-                                    <td>{{ $service->user_id }}</td>
                                     <td>
                                         <a href="/services/{{ $service->id }}" class="btn btn-primary" type="button" title="Visualizar">
                                             <i class="fa fa-eye"></i> 
