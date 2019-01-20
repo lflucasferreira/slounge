@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Alert;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users.index');
+        $users = User::paginate(10);
+        $users_total = User::count();
+        return view('users.index', compact('users', 'users_total'));
     }
 
     /**
@@ -34,7 +37,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -45,7 +48,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = $this->validation();
+        $attributes['password'] = bcrypt('secret');
+        $request = User::create($attributes);
+        Alert::success('Usuário cadastrado com sucesso!');
+        return redirect('/users');
     }
 
     /**
@@ -54,9 +61,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -65,9 +72,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -77,9 +84,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(User $user)
     {
-        //
+        $user->update($this->validation());
+        Alert::success('Usuário atualizado com sucesso!');
+        return redirect()->route('users.show', $user->id);
     }
 
     /**
@@ -88,8 +97,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        Alert::success('Usuário excluído com sucesso!');
+        return redirect('/users');
+    }
+
+    public function validation()
+    {
+        return request()->validate([
+            'name' => ['required', 'min:3', 'max:255'],
+            'email' => ['required', 'min:3', 'max:255']
+        ]);
     }
 }

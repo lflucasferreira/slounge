@@ -6,6 +6,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Service::class, function (Faker $faker) {
     return [
+        'sku' => $faker->randomNumber(5),
         'nome' => substr($faker->text(10), 0, -1),
         'descricao' => $faker->text(50),
         'preco' => $faker->randomNumber(2),

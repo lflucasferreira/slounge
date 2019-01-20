@@ -42,7 +42,7 @@
                 <div class="card">
                     <div class="content">
                         <div class="row">
-                            <a href="{{ route('rewards.index')}}" style="color: #000;text-decoration: none;">
+                            <a href="{{ route('categories.index')}}" style="color: #000;text-decoration: none;">
                                 <div class="col-xs-5">
                                     <div class="icon-big icon-info text-center">
                                         <i class="ti-tag"></i>
@@ -59,7 +59,7 @@
                         <div class="footer">
                             <hr>
                             <div class="stats">
-                                <i class="ti-exchange-vertical"></i> Grináuria +100
+                                <!-- <i class="ti-bookmark"></i> Apoio & Consultoria -->
                             </div>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                 <div class="card">
                     <div class="content">
                         <div class="row">
-                            <a href="{{ route('wallets.index')}}" style="color: #000;text-decoration: none;">
+                            <a href="{{ route('coupons.index')}}" style="color: #000;text-decoration: none;">
                                 <div class="col-xs-5">
                                     <div class="icon-big icon-success text-center">
                                         <i class="ti-ticket"></i>
@@ -119,7 +119,7 @@
                         <div class="footer">
                             <hr>
                             <div class="stats">
-                                <i class="ti-pulse"></i> R$ 450,00 [R$ 56,25]
+                                <!-- <i class="ti-pulse"></i> R$ 450,00 [R$ 56,25] -->
                             </div>
                         </div>
                     </div>
@@ -195,7 +195,7 @@
                 <div class="card">
                     <div class="content">
                         <div class="row">
-                            <a href="{{ route('clients.index')}}" style="color: #000;text-decoration: none;">
+                            <a href="{{ route('services.index')}}" style="color: #000;text-decoration: none;">
                                 <div class="col-xs-5">
                                     <div class="icon-big icon-info text-center">
                                         <i class="ti-briefcase"></i>
@@ -212,7 +212,7 @@
                         <div class="footer">
                             <hr>
                             <div class="stats">
-                                <i class="ti-star"></i> Ana Delgado
+                                <!-- <i class="ti-star"></i> Ana Delgado -->
                             </div>
                         </div>
                     </div>
@@ -225,7 +225,7 @@
                 <div class="card">
                     <div class="content">
                         <div class="row">
-                            <a href="{{ route('appointments.index')}}" style="color: #000;text-decoration: none;">
+                            <a href="{{ route('users.index')}}" style="color: #000;text-decoration: none;">
                                 <div class="col-xs-5">
                                     <div class="icon-big icon-danger text-center">
                                         <i class="ti-user"></i>
@@ -242,7 +242,7 @@
                         <div class="footer">
                             <hr>
                             <div class="stats">
-                                <i class="ti-hand-point-right"></i> 14/01 às 10:00 (2 dias)
+                                <!-- <i class="ti-hand-point-right"></i> 14/01 às 10:00 (2 dias) -->
                             </div>
                         </div>
                     </div>

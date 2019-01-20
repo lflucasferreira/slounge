@@ -31,7 +31,7 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>SKU</th>
                                     <th>Nome</th>
                                     <th>Categoria</th>
                                     <th>Usuário</th>
@@ -44,12 +44,12 @@
                                 
                                 @foreach($services as $service)
                                 <tr>
-                                    <td>{{ $service->id }}</td>
+                                    <td>{{ $service->sku }}</td>
                                     <td>{{ $service->nome }}</td>
                                     <td>{{ $service->category->nome }}</td>
                                     <td>{{ $service->user->name }}</td>
                                     <td>R$ {{ $service->preco }}</td>
-                                    <td>{{ $service->duracao }}</td>
+                                    <td>{{ $service->duracao ? \Carbon\Carbon::parse($service->duracao)->format('H:i') : null }}</td>
                                     <td>
                                         <a href="/services/{{ $service->id }}" class="btn btn-primary" type="button" title="Visualizar">
                                             <i class="fa fa-eye"></i> 
