@@ -113,8 +113,9 @@ class CategoryController extends Controller
     public function validation()
     {
         return request()->validate([
-            'nome' => ['required', 'unique:categories', 'min:3', 'max:255'],
+            'nome' => ['required', 'min:3', 'max:255'],
             'status' => ['required']
         ]);
+
     }
 }
