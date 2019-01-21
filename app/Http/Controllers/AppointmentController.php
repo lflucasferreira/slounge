@@ -24,7 +24,9 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        return view('appointments.index');
+        $appointments = Appointment::orderByDesc('inicio')->paginate(10);
+        $appointments_total = Appointment::count();
+        return view('appointments.index', compact('appointments', 'appointments_total'));
     }
 
     /**

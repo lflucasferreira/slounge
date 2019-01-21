@@ -15,7 +15,18 @@ class CreateAppointmentsTable extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->increments('id');
+            $table->decimal('preco', 8, 2)->nullable();
+            $table->datetime('inicio')->nullable();
+            $table->datetime('fim')->nullable();
+            $table->string('observacao')->nullable();
+            $table->unsignedInteger('client_id')->nullable();
+            $table->unsignedInteger('service_id')->nullable();
+            $table->string('situacao')->default('agendado');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('client_id')->references('id')->on('clients')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('service_id')->references('id')->on('services')->onUpdate('cascade')->onDelete('restrict');
         });
     }
 
