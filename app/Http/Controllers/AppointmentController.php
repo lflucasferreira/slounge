@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+use App\Models\Client;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
@@ -36,7 +38,9 @@ class AppointmentController extends Controller
      */
     public function create()
     {
-        //
+        $clients = Client::orderBy('nome')->get();
+        $services = Service::orderBy('nome')->get();
+        return view('appointments.create', compact('clients', 'services'));
     }
 
     /**
