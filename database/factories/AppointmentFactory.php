@@ -7,8 +7,9 @@ use Faker\Generator as Faker;
 $factory->define(App\Models\Appointment::class, function (Faker $faker) {
     return [
         'preco' => $faker->randomNumber(2),
-        'inicio' => $faker->date($format = 'Y-m-d H:i', $max = 'now'),
-        'fim' => $faker->date($format = 'Y-m-d H:i', $max = 'now'),
+        'data' => $faker->date($format = 'Y-m-d', $max = 'now'),
+        'inicio' => $faker->time($format = 'H:i:s', $max = 'now'),
+        'fim' => $faker->time($format = 'H:i:s', $max = 'now'),
         'observacao' => $faker->text(50),
         'client_id' => function () {
             return factory(Client::class)->create()->id;

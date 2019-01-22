@@ -46,7 +46,7 @@
                                 <tr>
                                     <td>{{ $appointment->client->nome }} {{ $appointment->client->sobrenome }}</td>
                                     <td>{{ $appointment->service->nome }}</td>
-                                    <td>{{ $appointment->inicio ? $appointment->inicio->format('d/m/Y') : null }}</td>
+                                    <td>{{ $appointment->data ? $appointment->data->format('d/m/Y') : null }}</td>
                                     <td>{{ $appointment->inicio ? \Carbon\Carbon::parse($appointment->inicio)->format('H:i') : null}} às 
                                         {{ $appointment->fim ? \Carbon\Carbon::parse($appointment->fim)->format('H:i') : null}}
                                     </td>

@@ -11,7 +11,7 @@ class Appointment extends Model
     ];
 
     protected $dates = [
-        'inicio', 'fim'
+        'data'
     ];
 
     public function client()

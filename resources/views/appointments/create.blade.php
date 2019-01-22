@@ -41,37 +41,50 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Descrição</label>
-                                        <textarea type="text" minLength="3" maxlength="255" class="form-control border-input  {{ $errors->has('descricao') ? 'is-invalid' : '' }}" name="descricao">{{ old('descricao')}}</textarea>
+                                        <label>Data</label>
+                                        <input type="date" maxlength="255" class="form-control border-input  {{ $errors->has('data') ? 'is-invalid' : '' }}" name="data" value="{{ old('data') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Hora Inicial</label>
+                                        <input type="time" maxlength="255" class="form-control border-input  {{ $errors->has('inicio') ? 'is-invalid' : '' }}" name="inicio" value="{{ old('inicio') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Hora Final</label>
+                                        <input type="time" maxlength="255" class="form-control border-input  {{ $errors->has('fim') ? 'is-invalid' : '' }}" name="fim" value="{{ old('fim') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Preço</label>
+                                        <input type="number" maxlength="255" class="form-control border-input  {{ $errors->has('preco') ? 'is-invalid' : '' }}" name="preco" value="{{ old('preco') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Situação</label>
+                                        <select class="form-control border-input {{ $errors->has('situacao') ? 'is-invalid' : '' }}" name="situacao" required>
+                                            <option value="" hidden>Selecionar</option>
+                                            <option value="agendado" @if( old('situacao') == 'agendado' ) selected @endif>Agendado</option>
+                                            <option value="cancelado" @if( old('situacao') == 'cancelado' ) selected @endif>Cancelado</option>
+                                            <option value="concluido" @if( old('situacao') == 'concluido' ) selected @endif>Concluído</option>
+                                            <option value="confirmado" @if( old('situacao') == 'confirmado' ) selected @endif>Confirmado</option>
+                                            <option value="reagendado" @if( old('situacao') == 'reagendado' ) selected @endif>Reagendado</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Preço</label>
-                                        <input type="number" maxlength="255" class="form-control border-input  {{ $errors->has('preco') ? 'is-invalid' : '' }}" name="preco" value="{{ old('preco')}}">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>Duração</label>
-                                        <input type="time" maxlength="255" class="form-control border-input  {{ $errors->has('duracao') ? 'is-invalid' : '' }}" name="duracao" value="{{ old('duracao')}}">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>Validade Inicial</label>
-                                        <input type="date" maxlength="255" class="form-control border-input  {{ $errors->has('inicio') ? 'is-invalid' : '' }}" name="inicio" value="{{ old('inicio')}}">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>Validade Final</label>
-                                        <input type="date" maxlength="255" class="form-control border-input  {{ $errors->has('fim') ? 'is-invalid' : '' }}" name="fim" value="{{ old('fim')}}">
+                                        <label>Observação</label>
+                                        <textarea type="text" minLength="3" maxlength="255" class="form-control border-input  {{ $errors->has('descricao') ? 'is-invalid' : '' }}" name="descricao">{{ old('descricao')}}</textarea>
                                     </div>
                                 </div>
                             </div>

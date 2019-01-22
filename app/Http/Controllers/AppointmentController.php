@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Alert;
 use App\Models\Appointment;
 use App\Models\Client;
 use App\Models\Service;
@@ -26,7 +27,7 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $appointments = Appointment::orderByDesc('inicio')->paginate(10);
+        $appointments = Appointment::orderByDesc('data')->paginate(10);
         $appointments_total = Appointment::count();
         return view('appointments.index', compact('appointments', 'appointments_total'));
     }
@@ -51,7 +52,10 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = $this->validation();
+        $request = Appointment::create($attributes);
+        Alert::success('O compromisso foi cadastrado com sucesso!');
+        return redirect('/appointments');
     }
 
     /**
@@ -97,5 +101,19 @@ class AppointmentController extends Controller
     public function destroy(Appointment $appointment)
     {
         //
+    }
+
+    public function validation()
+    {
+        return request()->validate([
+            'client_id' => ['required'],
+            'service_id' => ['required'],
+            'data' => ['required'],
+            'inicio' => ['required'],
+            'fim' => ['required'],
+            'preco' => ['required'],
+            'situacao' => ['required'],
+            'observacao' => ['nullable']
+        ]);
     }
 }
