@@ -69,7 +69,7 @@ class AppointmentController extends Controller
      */
     public function show(Appointment $appointment)
     {
-        //
+        return view('appointments.show', compact('appointment'));
     }
 
     /**
@@ -80,7 +80,9 @@ class AppointmentController extends Controller
      */
     public function edit(Appointment $appointment)
     {
-        //
+        $clients = Client::orderBy('nome')->get();
+        $services = Service::orderBy('nome')->get();
+        return view('appointments.edit', compact('appointment', 'clients', 'services'));
     }
 
     /**
@@ -103,7 +105,9 @@ class AppointmentController extends Controller
      */
     public function destroy(Appointment $appointment)
     {
-        //
+        $appointment->delete();
+        Alert::success('O compromisso foi excluído com sucesso!');
+        return redirect('/appointments');
     }
 
     public function validation()
