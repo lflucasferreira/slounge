@@ -53,10 +53,7 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        $attributes = $this->validation();
-        $attributes['inicio'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['inicio'] . ":00"));
-        $attributes['fim'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['fim'] . ":00"));
-        $request = Appointment::create($attributes);
+        $request = Appointment::create($this->mergeDates());
         Alert::success('O compromisso foi cadastrado com sucesso!');
         return redirect('/appointments');
     }
@@ -94,10 +91,7 @@ class AppointmentController extends Controller
      */
     public function update(Appointment $appointment)
     {
-        $attributes = $this->validation();
-        $attributes['inicio'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['inicio'] . ":00"));
-        $attributes['fim'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['fim'] . ":00"));
-        $appointment->update($attributes);
+        $appointment->update($this->mergeDates());
         Alert::success('Cliente atualizado com sucesso!');
         return redirect()->route('appointments.show', $appointment->id);
     }
@@ -127,5 +121,14 @@ class AppointmentController extends Controller
             'situacao' => ['required'],
             'observacao' => ['nullable']
         ]);
+    }
+
+    public function mergeDates()
+    {
+        $attributes = $this->validation();
+        $attributes['inicio'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['inicio'] . ":00"));
+        $attributes['fim'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['fim'] . ":00"));
+
+        return $attributes;
     }
 }
