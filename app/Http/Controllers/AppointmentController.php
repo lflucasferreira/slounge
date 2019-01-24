@@ -53,7 +53,7 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        $request = Appointment::create($this->mergeDates());
+        $request = Appointment::create($this->attributes());
         Alert::success('O compromisso foi cadastrado com sucesso!');
         return redirect('/appointments');
     }
@@ -91,7 +91,7 @@ class AppointmentController extends Controller
      */
     public function update(Appointment $appointment)
     {
-        $appointment->update($this->mergeDates());
+        $appointment->update($this->attributes());
         Alert::success('Cliente atualizado com sucesso!');
         return redirect()->route('appointments.show', $appointment->id);
     }
@@ -123,7 +123,7 @@ class AppointmentController extends Controller
         ]);
     }
 
-    public function mergeDates()
+    public function attributes()
     {
         $attributes = $this->validation();
         $attributes['inicio'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['inicio'] . ":00"));
