@@ -28,7 +28,7 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        $appointments = Appointment::orderByDesc('data')->paginate(10);
+        $appointments = Appointment::orderByDesc('inicio')->paginate(10);
         $appointments_total = Appointment::count();
         return view('appointments.index', compact('appointments', 'appointments_total'));
     }
@@ -92,9 +92,14 @@ class AppointmentController extends Controller
      * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Appointment $appointment)
+    public function update(Appointment $appointment)
     {
-        //
+        $attributes = $this->validation();
+        $attributes['inicio'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['inicio'] . ":00"));
+        $attributes['fim'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['fim'] . ":00"));
+        $appointment->update($attributes);
+        Alert::success('Cliente atualizado com sucesso!');
+        return redirect()->route('appointments.show', $appointment->id);
     }
 
     /**
