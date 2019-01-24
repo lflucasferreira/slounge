@@ -44,25 +44,25 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Data</label>
-                                        <input type="date" maxlength="255" class="form-control border-input  {{ $errors->has('data') ? 'is-invalid' : '' }}" name="data" value="{{ old('data') }}">
+                                        <input type="date" maxlength="8" class="form-control border-input  {{ $errors->has('data') ? 'is-invalid' : '' }}" name="data" value="{{ old('data') }}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label>Hora Inicial</label>
-                                        <input type="time" maxlength="255" class="form-control border-input  {{ $errors->has('inicio') ? 'is-invalid' : '' }}" name="inicio" value="{{ old('inicio') }}">
+                                        <input type="time" maxlength="4" class="form-control border-input  {{ $errors->has('inicio') ? 'is-invalid' : '' }}" name="inicio" value="{{ old('inicio') }}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label>Hora Final</label>
-                                        <input type="time" maxlength="255" class="form-control border-input  {{ $errors->has('fim') ? 'is-invalid' : '' }}" name="fim" value="{{ old('fim') }}">
+                                        <input type="time" maxlength="4" class="form-control border-input  {{ $errors->has('fim') ? 'is-invalid' : '' }}" name="fim" value="{{ old('fim') }}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label>Preço</label>
-                                        <input type="number" maxlength="255" class="form-control border-input  {{ $errors->has('preco') ? 'is-invalid' : '' }}" name="preco" value="{{ old('preco') }}">
+                                        <input type="number" maxlength="8" class="form-control border-input  {{ $errors->has('preco') ? 'is-invalid' : '' }}" name="preco" value="{{ old('preco') }}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -84,7 +84,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Observação</label>
-                                        <textarea type="text" minLength="3" maxlength="255" class="form-control border-input  {{ $errors->has('descricao') ? 'is-invalid' : '' }}" name="descricao">{{ old('descricao')}}</textarea>
+                                        <textarea type="text" minLength="3" maxlength="255" class="form-control border-input  {{ $errors->has('observacao') ? 'is-invalid' : '' }}" name="observacao">{{ old('observacao')}}</textarea>
                                     </div>
                                 </div>
                             </div>

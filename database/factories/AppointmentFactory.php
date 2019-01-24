@@ -8,8 +8,8 @@ $factory->define(App\Models\Appointment::class, function (Faker $faker) {
     return [
         'preco' => $faker->randomNumber(2),
         'data' => $faker->date($format = 'Y-m-d', $max = 'now'),
-        'inicio' => $faker->time($format = 'H:i:s', $max = 'now'),
-        'fim' => $faker->time($format = 'H:i:s', $max = 'now'),
+        'inicio' => $faker->date($format = 'Y-m-d H:i:s', $max = 'now'),
+        'fim' => $faker->date($format = 'Y-m-d H:i:s', $max = 'now'),
         'observacao' => $faker->text(50),
         'client_id' => function () {
             return factory(Client::class)->create()->id;

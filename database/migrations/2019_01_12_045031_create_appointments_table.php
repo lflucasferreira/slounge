@@ -17,8 +17,8 @@ class CreateAppointmentsTable extends Migration
             $table->increments('id');
             $table->decimal('preco', 8, 2);
             $table->date('data');
-            $table->time('inicio');
-            $table->time('fim');
+            $table->dateTime('inicio');
+            $table->dateTime('fim');
             $table->string('observacao')->nullable();
             $table->unsignedInteger('client_id');
             $table->unsignedInteger('service_id');

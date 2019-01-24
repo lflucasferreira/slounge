@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Alert;
+use Illuminate\Support\Carbon;
 use App\Models\Appointment;
 use App\Models\Client;
 use App\Models\Service;
@@ -53,6 +54,8 @@ class AppointmentController extends Controller
     public function store(Request $request)
     {
         $attributes = $this->validation();
+        $attributes['inicio'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['inicio'] . ":00"));
+        $attributes['fim'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['fim'] . ":00"));
         $request = Appointment::create($attributes);
         Alert::success('O compromisso foi cadastrado com sucesso!');
         return redirect('/appointments');
@@ -109,8 +112,8 @@ class AppointmentController extends Controller
             'client_id' => ['required'],
             'service_id' => ['required'],
             'data' => ['required'],
-            'inicio' => ['required'],
-            'fim' => ['required'],
+            'inicio' => ['required', 'date_format:H:i'],
+            'fim' => ['required', 'date_format:H:i', 'after:inicio'],
             'preco' => ['required'],
             'situacao' => ['required'],
             'observacao' => ['nullable']
