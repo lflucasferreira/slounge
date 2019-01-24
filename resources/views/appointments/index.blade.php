@@ -1,6 +1,6 @@
 @extends('layouts.template')
 
-@section('navtitle', 'Agenda')
+@section('navtitle', 'Compromissos')
 
 @section('content')
 <div class="content">
