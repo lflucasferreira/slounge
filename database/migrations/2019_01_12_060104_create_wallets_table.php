@@ -17,15 +17,21 @@ class CreateWalletsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('appointment_id');
             $table->unsignedInteger('user_id');
-            $table->decimal('valor_total', 8, 2);
+            $table->decimal('valor', 8, 2);
             $table->decimal('desconto', 8, 2)->nullable();
-            $table->decimal('valor_pago', 8, 2);
+            $table->decimal('pago', 8, 2);
             $table->decimal('saldo', 8, 2)->nullable();
             $table->decimal('custos', 8, 2)->nullable();
             $table->date('data_pagamento')->nullable();
             $table->string('situacao')->nullable();
-            $table->unsignedInteger('cupom_id')->nullable();
+            $table->unsignedInteger('coupon_id')->nullable();
+            $table->unsignedInteger('from_wallet_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('appointment_id')->references('id')->on('appointments')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('coupon_id')->references('id')->on('coupons')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('from_wallet_id')->references('id')->on('wallets')->onUpdate('cascade')->onDelete('restrict');
         });
     }
 

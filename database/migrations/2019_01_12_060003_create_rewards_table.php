@@ -15,7 +15,16 @@ class CreateRewardsTable extends Migration
     {
         Schema::create('rewards', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('appointment_id');
+            $table->unsignedInteger('user_id');
+            $table->integer('pontos');
+            $table->dateTime('validade')->nullable();
+            $table->boolean('status')->default(true);
+            $table->boolean('resgatado')->default(false);
             $table->timestamps();
+
+            $table->foreign('appointment_id')->references('id')->on('appointments')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('restrict');
         });
     }
 

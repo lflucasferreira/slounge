@@ -25,6 +25,9 @@ class CreateServicesTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('category_id');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('restrict');
         });
     }
 
