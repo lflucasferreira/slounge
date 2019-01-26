@@ -92,7 +92,7 @@ class AppointmentController extends Controller
     public function update(Appointment $appointment)
     {
         $appointment->update($this->attributes());
-        Alert::success('Cliente atualizado com sucesso!');
+        Alert::success('O compromisso foi atualizado com sucesso!');
         return redirect()->route('appointments.show', $appointment->id);
     }
 
@@ -128,7 +128,6 @@ class AppointmentController extends Controller
         $attributes = $this->validation();
         $attributes['inicio'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['inicio'] . ":00"));
         $attributes['fim'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['fim'] . ":00"));
-
         return $attributes;
     }
 }

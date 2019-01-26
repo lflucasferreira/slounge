@@ -15,6 +15,16 @@ class CreateWalletsTable extends Migration
     {
         Schema::create('wallets', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('appointment_id');
+            $table->unsignedInteger('user_id');
+            $table->decimal('valor_total', 8, 2);
+            $table->decimal('desconto', 8, 2)->nullable();
+            $table->decimal('valor_pago', 8, 2);
+            $table->decimal('saldo', 8, 2)->nullable();
+            $table->decimal('custos', 8, 2)->nullable();
+            $table->date('data_pagamento')->nullable();
+            $table->string('situacao')->nullable();
+            $table->unsignedInteger('cupom_id')->nullable();
             $table->timestamps();
         });
     }
