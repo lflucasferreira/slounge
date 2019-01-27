@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Alert;
-use App\Models\User;
+use App\Models\Reward;
 use App\Models\Service;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -100,7 +101,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if(Service::where('user_id', '=', $user->id)->first()){
+        if (Reward::where('user_id', '=', $user->id)->first() || Service::where('user_id', '=', $user->id)->first()) {
             Alert::error('Usuário não pôde ser excluído!');
             return redirect()->route('users.show', $user->id);
         } else {

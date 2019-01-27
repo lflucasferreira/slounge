@@ -44,7 +44,7 @@
                                 
                                 @foreach($rewards as $reward)
                                 <tr>
-                                    <td>{{ $reward->appointment->client->nome }} {{ $reward->appointment->client->sobrenome }}</td>
+                                    <td>{{ $reward->client->nome }} {{ $reward->client->sobrenome }}</td>
                                     <td>{{ $reward->pontos }}</td>
                                     <td>{{ $reward->validade ? $reward->validade->format('d/m/Y') : 'Indeterminado' }}</td>
                                     <td>{{ $reward->user->name }}</td>

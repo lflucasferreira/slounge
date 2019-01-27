@@ -99,7 +99,6 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        
         if(Service::where('category_id', '=', $category->id)->first()){
             Alert::error('Categoria não pôde ser excluída!');
             return redirect()->route('categories.show', $category->id);

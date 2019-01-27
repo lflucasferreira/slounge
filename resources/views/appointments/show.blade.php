@@ -10,7 +10,6 @@
                 <div class="card">
                     <div class="header">
                         <h4 class="title">Informações do Compromisso</h4>
-                        @include('errors')
                     </div>
                     <div class="content">
                         <form method="post" action="/appointments/{{ $appointment->id }}">

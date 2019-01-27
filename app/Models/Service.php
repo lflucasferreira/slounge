@@ -14,7 +14,7 @@ class Service extends Model
         'inicio', 'fim'
     ];
 
-    public function appointment()
+    public function appointments()
     {
         return $this->hasMany(Appointment::class);
     }

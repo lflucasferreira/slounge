@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Alert;
 use App\Models\Client;
+use App\Models\Appointment;
+use App\Models\Reward;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -98,9 +100,14 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        $client->delete();
-        Alert::success('Cliente excluído com sucesso!');
-        return redirect('/clients');
+        if (Appointment::where('client_id', '=', $client->id)->first() || Reward::where('client_id', '=', $client->id)->first()) {
+            Alert::error('O cliente não pôde ser excluído!');
+            return redirect()->route('clients.show', $client->id);
+        } else {
+            $client->delete();
+            Alert::success('Cliente excluído com sucesso!');
+            return redirect('/clients');
+        }
     }
 
     public function validation()

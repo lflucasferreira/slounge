@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Alert;
-use Illuminate\Support\Carbon;
 use App\Models\Appointment;
 use App\Models\Client;
+use App\Models\Reward;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class AppointmentController extends Controller
 {
@@ -104,9 +105,14 @@ class AppointmentController extends Controller
      */
     public function destroy(Appointment $appointment)
     {
-        $appointment->delete();
-        Alert::success('O compromisso foi excluído com sucesso!');
-        return redirect('/appointments');
+        if (Reward::where('appointment_id', '=', $appointment->id)->first()) {
+            Alert::error('O compromisso não pôde ser excluído!');
+            return redirect()->route('appointments.show', $appointment->id);
+        } else {
+            $appointment->delete();
+            Alert::success('O compromisso foi excluído com sucesso!');
+            return redirect('/appointments');
+        }
     }
 
     public function validation()

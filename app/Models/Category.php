@@ -8,7 +8,7 @@ class Category extends Model
 {
     protected $fillable = ['nome', 'status'];
 
-    public function service()
+    public function services()
     {
         return $this->hasMany(Service::class);
     }

@@ -66,7 +66,8 @@ class RewardController extends Controller
      */
     public function show(Reward $reward)
     {
-        //
+        $appointment = Appointment::find($reward->appointment_id);
+        return view('rewards.show', compact('appointment', 'reward'));
     }
 
     /**
@@ -100,7 +101,9 @@ class RewardController extends Controller
      */
     public function destroy(Reward $reward)
     {
-        //
+        $reward->delete();
+        Alert::success('A pontuação foi excluída com sucesso!');
+        return redirect('/rewards');
     }
 
     public function attributes()

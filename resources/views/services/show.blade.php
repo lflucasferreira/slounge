@@ -10,7 +10,6 @@
                 <div class="card">
                     <div class="header">
                         <h4 class="title">Informações do Serviço</h4>
-                        @include('errors')
                     </div>
                     <div class="content">
                         <form method="post" action="/services/{{ $service->id }}">

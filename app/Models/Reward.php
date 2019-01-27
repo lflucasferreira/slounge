@@ -14,13 +14,19 @@ class Reward extends Model
         'validade'
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
+    
     public function appointment()
     {
         return $this->belongsTo(Appointment::class);
+    }
+    
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
