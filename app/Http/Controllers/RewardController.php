@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Reward;
+use Alert;
+use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
+use App\Models\Appointment;
+use App\Models\Client;
+use App\Models\Reward;
 
 class RewardController extends Controller
 {
@@ -36,7 +40,9 @@ class RewardController extends Controller
      */
     public function create()
     {
-        //
+        $appointments = Appointment::where([['situacao', 'concluido'], ['status', '1']])->get();
+        $clients = Client::orderBy('nome')->get();
+        return view('rewards.create', compact('appointments', 'clients'));
     }
 
     /**
@@ -46,8 +52,10 @@ class RewardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $request = Reward::create($this->attributes());
+        Alert::success('A pontuação foi cadastrada com sucesso!');
+        return redirect('/rewards');
     }
 
     /**
@@ -93,5 +101,35 @@ class RewardController extends Controller
     public function destroy(Reward $reward)
     {
         //
+    }
+
+    public function attributes()
+    {
+        $attributes = $this->validation();
+        $attributes['user_id'] = auth()->id();
+        if (!(is_null($attributes['data']) || $attributes['data'] == '')) {
+            if (!(is_null($attributes['hora']) || $attributes['hora'] == '')) {
+                $attributes['validade'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['hora'] . ":00"));
+            }else{
+                $attributes['validade'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . "23:59:59"));
+            }
+        }
+        $attributes = array_except($attributes, ['data']);
+        $attributes = array_except($attributes, ['hora']);
+        return $attributes;
+    }
+
+    public function validation()
+    {
+        return request()->validate([
+            'client_id' => ['required'],
+            'appointment_id' => ['nullable'],
+            'pontos' => ['required'],
+            'data' => ['required_with:hora'],
+            'hora' => ['nullable', 'date_format:H:i'],
+            'status' => ['required'],
+            'resgatado' => ['required'],
+            'observacao' => ['nullable']
+        ]);
     }
 }

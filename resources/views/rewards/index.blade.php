@@ -34,9 +34,9 @@
                                     <th>Cliente</th>
                                     <th>Pontos</th>
                                     <th>Validade</th>
-                                    <th>Situação</th>
-                                    <th>Resgatado</th>
                                     <th>Usuário</th>
+                                    <th>Situação</th>
+                                    <th>Condição</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
@@ -46,10 +46,10 @@
                                 <tr>
                                     <td>{{ $reward->appointment->client->nome }} {{ $reward->appointment->client->sobrenome }}</td>
                                     <td>{{ $reward->pontos }}</td>
-                                    <td>{{ $reward->validade ? $reward->validade->format('d/m/Y') : null }}</td>
-                                    <td>{{ $reward->status === 1 ? 'Ativo' : 'Inativo' }}</td>
-                                    <td>{{ $reward->resgatado === 0 ? 'Disponível' : 'Utilizado' }}</td>
+                                    <td>{{ $reward->validade ? $reward->validade->format('d/m/Y') : 'Indeterminado' }}</td>
                                     <td>{{ $reward->user->name }}</td>
+                                    <td>{{ $reward->status === 1 ? 'Ativo' : 'Inativo' }}</td>
+                                    <td>{{ $reward->resgatado === 0 ? 'Disponível' : 'Resgatado' }}</td>
                                     <td>
                                         <a href="/rewards/{{ $reward->id }}" class="btn btn-primary" type="button" title="Visualizar">
                                             <i class="fa fa-eye"></i> 
