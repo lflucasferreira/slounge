@@ -45,22 +45,22 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <label>Pontos</label>
                                         <input type="number" maxlength="8" class="form-control border-input  {{ $errors->has('pontos') ? 'is-invalid' : '' }}" name="pontos" value="{{ $reward->pontos ? $reward->pontos : null }}" required>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Data</label>
-                                        <input type="date" maxlength="4" class="form-control border-input  {{ $errors->has('data') ? 'is-invalid' : '' }}" name="data" value="{{ $reward->data ? $reward->data->format('Y-m-d') : null }}">
+                                        <input type="date" maxlength="4" class="form-control border-input  {{ $errors->has('data') ? 'is-invalid' : '' }}" name="data" value="{{ $reward->validade ? $reward->validade->format('Y-m-d') : null }}">
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label>Hora</label>
-                                        <input type="time" maxlength="4" class="form-control border-input  {{ $errors->has('hora') ? 'is-invalid' : '' }}" name="hora" value="{{ $reward->hora ? \Carbon\Carbon::parse($reward->hora)->format('H:i') : null }}">
+                                        <input type="time" maxlength="4" class="form-control border-input  {{ $errors->has('hora') ? 'is-invalid' : '' }}" name="hora" value="{{ $reward->validade ? \Carbon\Carbon::parse($reward->validade)->format('H:i') : null }}">
                                     </div>
                                 </div>
                                 

@@ -60,7 +60,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label>Condição</label>
-                                        <input type="text" class="form-control border-input" value="{{ $reward->resgatado ? 'Resgatado' : 'Disponível' }}" disabled>
+                                        <input type="text" class="form-control border-input" value="{{ $reward->resgatado ? 'Disponível' : 'Resgatado' }}" disabled>
                                     </div>
                                 </div>
                             </div>
