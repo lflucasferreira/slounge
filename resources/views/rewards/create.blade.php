@@ -34,7 +34,7 @@
                                         <select class="form-control border-input {{ $errors->has('appointment_id') ? 'is-invalid' : '' }}" name="appointment_id">
                                             <option value="" hidden>Selecionar</option>
                                             @foreach ($appointments as $appointment)
-                                            <option value="{{ $appointment->id }}" @if(old('appointment_id') == $appointment->id) selected @endif>{{ $appointment->id }} | {{ $appointment->client->nome }} {{ $appointment->client->sobrenome }} | {{ $appointment->inicio }}</option>
+                                            <option value="{{ $appointment->id }}" @if(old('appointment_id') == $appointment->id) selected @endif>ID: {{ $appointment->id }} | {{ $appointment->client->nome }} {{ $appointment->client->sobrenome }} | {{ $appointment->inicio->format('d/m/Y') }} às {{ $appointment->inicio->format('H:i') }}</option>
                                             @endforeach
                                         </select>
                                     </div>

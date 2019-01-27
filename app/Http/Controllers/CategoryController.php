@@ -49,7 +49,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $attributes = $this->validation();
+        $attributes = $this->validationCreate();
         $request = Category::create($attributes);
         Alert::success('Categoria cadastrada com sucesso!');
         return redirect('/categories');
@@ -86,7 +86,7 @@ class CategoryController extends Controller
      */
     public function update(Category $category)
     {
-        $category->update($this->validation());
+        $category->update($this->validationUpdate());
         Alert::success('Categoria atualizada com sucesso!');
         return redirect()->route('categories.show', $category->id);
     }
@@ -100,7 +100,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         if(Service::where('category_id', '=', $category->id)->first()){
-            Alert::error('Categoria não pôde ser excluída!');
+            Alert::error('A categoria não pôde ser excluída!');
             return redirect()->route('categories.show', $category->id);
         } else {
             $category->delete();
@@ -109,10 +109,19 @@ class CategoryController extends Controller
         }
     }
 
-    public function validation()
+    public function validationCreate()
     {
         return request()->validate([
-            'nome' => ['required', 'min:3', 'max:255'],
+            'nome' => ['required', 'unique:categories', 'min:3', 'max:255'],
+            'status' => ['required']
+        ]);
+
+    }
+
+    public function validationUpdate()
+    {
+        return request()->validate([
+            'nome' => ['required', 'exists:categories', 'min:3', 'max:255'],
             'status' => ['required']
         ]);
 

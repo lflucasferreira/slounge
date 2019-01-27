@@ -78,7 +78,9 @@ class RewardController extends Controller
      */
     public function edit(Reward $reward)
     {
-        //
+        $appointments = Appointment::where('client_id', $reward->client_id)->get();
+        $clients = Client::orderBy('nome')->get();
+        return view('rewards.edit', compact('appointments', 'clients', 'reward'));
     }
 
     /**
@@ -88,9 +90,11 @@ class RewardController extends Controller
      * @param  \App\Models\Reward  $reward
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Reward $reward)
+    public function update(Reward $reward)
     {
-        //
+        $reward->update($this->attributes());
+        Alert::success('A pontuação foi atualizada com sucesso!');
+        return redirect()->route('rewards.show', $reward->id);
     }
 
     /**
