@@ -24,7 +24,9 @@ class RewardController extends Controller
      */
     public function index()
     {
-        return view('rewards.index');
+        $rewards = Reward::orderBy('created_at')->paginate(10);
+        $rewards_total = Reward::count();
+        return view('rewards.index', compact('rewards', 'rewards_total'));
     }
 
     /**

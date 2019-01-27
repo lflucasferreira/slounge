@@ -19,8 +19,8 @@ class CreateRewardsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->integer('pontos');
             $table->dateTime('validade')->nullable();
-            $table->boolean('status')->default(true);
-            $table->boolean('resgatado')->default(false);
+            $table->boolean('status')->default(true); // 1 - Se está ativo (se torna 0 caso haja validade e esteja expirada) | 0 - Se estiver inativo (ou quando expirado pela validade)
+            $table->boolean('resgatado')->default(false); // 1 - Se foi utilizado (resgatado) | 0 - Se ainda está disponível
             $table->timestamps();
 
             $table->foreign('appointment_id')->references('id')->on('appointments')->onUpdate('cascade')->onDelete('restrict');
