@@ -29,7 +29,7 @@
                         <div class="footer">
                             <hr>
                             <div class="stats">
-                                <i class="ti-hand-point-right"></i> 14/01 às 10:00 (2 dias)
+                                {{-- <i class="ti-hand-point-right"></i> 14/01 às 10:00 (2 dias) --}}
                             </div>
                         </div>
                     </div>
