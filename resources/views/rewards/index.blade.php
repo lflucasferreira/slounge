@@ -17,7 +17,7 @@
                                 @elseif ($rewards_total === 1) 
                                     Total de {{ $rewards_total }} pontuação
                                 @else 
-                                    Nenhum pontuação ainda 
+                                    Nenhuma pontuação ainda 
                                 @endif
                             </p>
                         </div>

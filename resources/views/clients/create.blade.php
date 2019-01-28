@@ -89,7 +89,7 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Email</label>
+                                        <label>Email</label>
                                         <input type="email" maxlength="255" class="form-control border-input  {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email" value="{{ old('email')}}">
                                     </div>
                                 </div>

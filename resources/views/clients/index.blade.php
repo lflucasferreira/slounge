@@ -10,7 +10,7 @@
                 <div class="card">
                     <div class="header">
                         <div class="pull-left">
-                            <h4 class="title">Clientes Ativos</h4>
+                            <h4 class="title">Clientes</h4>
                             <p class="category">   
                                 @if ($clients_total > 1) 
                                     Total de {{ $clients_total }} clientes 

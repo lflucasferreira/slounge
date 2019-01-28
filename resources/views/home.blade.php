@@ -89,7 +89,7 @@
                         <div class="footer">
                             <hr>
                             <div class="stats">
-                                <i class="ti-star"></i> {{ $topClientInfo['nome'] }} {{ $topClientInfo['sobrenome'] }} ({{ $topClient->total }})
+                                @if(!is_null($topClient)) <i class="ti-star"></i> {{ $topClientInfo['nome'] }} {{ $topClientInfo['sobrenome'] }} ({{ $topClient->total }}) @endif
                             </div>
                         </div>
                     </div>
@@ -182,7 +182,7 @@
                         <div class="footer">
                             <hr>
                             <div class="stats">
-                                <i class="ti-exchange-vertical"></i> {{ $mostRecentReward->client->nome }} ({{ $mostRecentReward->pontos }} pontos)
+                                @if(!is_null($mostRecentReward))<i class="ti-exchange-vertical"></i> {{ $mostRecentReward->client->nome }} ({{ $mostRecentReward->pontos }} pontos) @endif
                             </div>
                         </div>
                     </div>
@@ -204,7 +204,7 @@
                                 <div class="col-xs-7">
                                     <div class="numbers">
                                         <p>Serviços</p>
-                                        {{ $clients }}
+                                        {{ $services }}
                                     </div>
                                 </div>
                             </a>
