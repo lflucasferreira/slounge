@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Alert;
+use App\Models\Client;
 use App\Models\Coupon;
+use App\Models\Reward;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CouponController extends Controller
@@ -36,7 +40,9 @@ class CouponController extends Controller
      */
     public function create()
     {
-        //
+        $clients = Client::orderBy('nome')->get();
+        $users = User::orderBy('name')->get();
+        return view('coupons.create', compact('clients', 'users'));
     }
 
     /**
@@ -47,7 +53,9 @@ class CouponController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request = Coupon::create($this->validation());
+        Alert::success('O cupom foi cadastrado com sucesso!');
+        return redirect('/coupons');
     }
 
     /**
@@ -58,7 +66,7 @@ class CouponController extends Controller
      */
     public function show(Coupon $coupon)
     {
-        //
+        return view('coupons.show', compact('coupon'));
     }
 
     /**
@@ -69,7 +77,9 @@ class CouponController extends Controller
      */
     public function edit(Coupon $coupon)
     {
-        //
+        $clients = Client::orderBy('nome')->get();
+        $users = User::orderBy('name')->get();
+        return view('coupons.edit', compact('clients', 'coupon', 'users'));
     }
 
     /**
@@ -79,9 +89,11 @@ class CouponController extends Controller
      * @param  \App\Models\Coupon  $coupon
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Coupon $coupon)
+    public function update(Coupon $coupon)
     {
-        //
+        $coupon->update($this->validation());
+        Alert::success('O cupom foi atualizado com sucesso!');
+        return redirect()->route('coupons.show', $coupon->id);
     }
 
     /**
@@ -92,6 +104,23 @@ class CouponController extends Controller
      */
     public function destroy(Coupon $coupon)
     {
-        //
+        $coupon->delete();
+        Alert::success('O cupom foi excluído com sucesso!');
+        return redirect('/coupons');
+    }
+
+    public function validation()
+    {
+        return request()->validate([
+            'client_id' => ['required'],
+            'user_id' => ['required'],
+            'descricao' => ['nullable'],
+            'codigo' => ['required'],
+            'pontos' => ['nullable'],
+            'valor' => ['nullable'],
+            'validade' => ['nullable'],
+            'status' => ['required'],
+            'aplicado' => ['required'],
+        ]);
     }
 }

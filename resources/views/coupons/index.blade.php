@@ -37,6 +37,7 @@
                                     <th>Valor</th>
                                     <th>Pontos</th>
                                     <th>Situação</th>
+                                    <th>Condição</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
@@ -47,9 +48,10 @@
                                     <td>{{ $coupon->client->nome }} {{ $coupon->client->sobrenome }}</td>
                                     <td>{{ $coupon->codigo }}</td>
                                     <td>{{ $coupon->validade ? $coupon->validade->format('d/m/Y') : 'Indeterminado' }}</td>
-                                    <td>R$ {{ $coupon->valor }}</td>
-                                    <td>{{ $coupon->pontos ? $coupon->pontos : null}}</td>
+                                    <td>{{ $coupon->valor ? 'R$' . $coupon->valor : '-' }}</td>
+                                    <td>{{ $coupon->pontos ? $coupon->pontos : '-' }}</td>
                                     <td>{{ $coupon->status === 1 ? 'Ativo' : 'Inativo' }}</td>
+                                    <td>{{ $coupon->aplicado === 0 ? 'Disponível' : 'Aplicado' }}</td>
                                     <td>
                                         <a href="/coupons/{{ $coupon->id }}" class="btn btn-primary" type="button" title="Visualizar">
                                             <i class="fa fa-eye"></i> 
