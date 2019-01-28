@@ -102,7 +102,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         if (Reward::where('user_id', '=', $user->id)->first() || Service::where('user_id', '=', $user->id)->first()) {
-            Alert::error('Usuário não pôde ser excluído!');
+            Alert::error('O usuário não pôde ser excluído!');
             return redirect()->route('users.show', $user->id);
         } else {
             $user->delete();

@@ -12,5 +12,19 @@ class Coupon extends Model
         'id', 'created_at', 'updated_at'
     ];
 
+    protected $dates = [
+        'validade'
+    ];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     
 }

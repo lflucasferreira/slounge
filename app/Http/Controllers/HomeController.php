@@ -10,6 +10,7 @@ use App\Models\Coupon;
 use App\Models\Wallet;
 use App\Models\Reward;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -31,12 +32,21 @@ class HomeController extends Controller
     public function index()
     {
         $appointments = Appointment::count();
+        $topClient = DB::table('appointments')
+                        ->select(DB::raw('count(*) as appointments_count, client_id, sum(preco) as total'))
+                        ->groupBy('client_id')
+                        ->havingRaw('MAX(preco)')
+                        ->orderByDesc('total')
+                        ->first();
+                        //dd($topClient);
+        $topClientInfo = Client::where('id', $topClient->client_id)->first()->toArray();
         $categories = Category::count();
         $clients = Client::count();
         $coupons = Coupon::count();
         $rewards = Reward::count();
+        $mostRecentReward = Reward::latest('id')->first();
         $users = User::count();
         $wallets = Wallet::count();
-        return view('home', compact('appointments', 'categories', 'clients', 'coupons', 'rewards', 'users', 'wallets'));
+        return view('home', compact('appointments', 'categories', 'clients', 'coupons', 'mostRecentReward', 'rewards', 'topClient', 'topClientInfo', 'users', 'wallets'));
     }
 }

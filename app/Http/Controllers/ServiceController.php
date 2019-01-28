@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Alert;
+use App\Models\Appointment;
 use App\Models\Category;
 use App\Models\Service;
 use App\Models\User;
@@ -104,9 +105,14 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        $service->delete();
-        Alert::success('Serviço excluído com sucesso!');
-        return redirect('/services');
+        if (Appointment::where('service_id', '=', $service->id)->first()) {
+            Alert::error('O compromisso não pôde ser excluído!');
+            return redirect()->route('services.show', $service->id);
+        } else {
+            $service->delete();
+            Alert::success('Serviço excluído com sucesso!');
+            return redirect('/services');
+        }
     }
 
     public function validation()

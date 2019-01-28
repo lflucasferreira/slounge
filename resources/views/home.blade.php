@@ -89,7 +89,7 @@
                         <div class="footer">
                             <hr>
                             <div class="stats">
-                                <i class="ti-star"></i> Ana Delgado
+                                <i class="ti-star"></i> {{ $topClientInfo['nome'] }} {{ $topClientInfo['sobrenome'] }} ({{ $topClient->total }})
                             </div>
                         </div>
                     </div>
@@ -182,7 +182,7 @@
                         <div class="footer">
                             <hr>
                             <div class="stats">
-                                <i class="ti-exchange-vertical"></i> Grináuria +100
+                                <i class="ti-exchange-vertical"></i> {{ $mostRecentReward->client->nome }} ({{ $mostRecentReward->pontos }} pontos)
                             </div>
                         </div>
                     </div>

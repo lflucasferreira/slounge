@@ -28,6 +28,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function coupons()
+    {
+        return $this->hasMany(Coupon::class);
+    }
+    
     public function rewards()
     {
         return $this->hasMany(Reward::class);

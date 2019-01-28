@@ -13,6 +13,11 @@ class Client extends Model
         return $this->hasMany(Appointment::class);
     }
 
+    public function coupons()
+    {
+        return $this->hasMany(Coupon::class);
+    }
+
     public function rewards()
     {
         return $this->hasMany(Reward::class);

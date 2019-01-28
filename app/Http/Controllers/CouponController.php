@@ -24,7 +24,9 @@ class CouponController extends Controller
      */
     public function index()
     {
-        return view('coupons.index');
+        $coupons = Coupon::orderByDesc('validade')->paginate(10);
+        $coupons_total = Coupon::count();
+        return view('coupons.index', compact('coupons', 'coupons_total'));
     }
 
     /**

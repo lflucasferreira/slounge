@@ -23,6 +23,7 @@ class CreateCouponsTable extends Migration
             $table->integer('pontos')->nullable();
             $table->dateTime('validade')->nullable();
             $table->boolean('status')->default(true);
+            $table->boolean('aplicado')->default(false);
             $table->timestamps();
 
             $table->foreign('client_id')->references('id')->on('clients')->onUpdate('cascade')->onDelete('restrict');
