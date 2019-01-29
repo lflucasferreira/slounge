@@ -29,7 +29,7 @@ class AppointmentRequest extends FormRequest
             'data' => ['required'],
             'inicio' => ['required', 'date_format:H:i'],
             'fim' => ['required', 'date_format:H:i', 'after:inicio'],
-            'preco' => ['required'],
+            'preco' => ['required', 'numeric'],
             'situacao' => ['required'],
             'observacao' => ['nullable']
         ];

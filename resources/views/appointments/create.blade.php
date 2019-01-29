@@ -62,7 +62,7 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label>Preço</label>
-                                        <input type="number" maxlength="8" class="form-control border-input  {{ $errors->has('preco') ? 'is-invalid' : '' }}" name="preco" value="{{ old('preco') }}" required>
+                                        <input type="number" step="0.01" maxlength="8" class="form-control border-input  {{ $errors->has('preco') ? 'is-invalid' : '' }}" name="preco" value="{{ old('preco') }}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3">

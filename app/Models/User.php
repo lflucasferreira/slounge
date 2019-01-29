@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
+    use HasRoles;
     use Notifiable;
 
     /**
@@ -32,11 +33,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Coupon::class);
     }
-    
+
     public function rewards()
     {
         return $this->hasMany(Reward::class);
     }
+
     public function services()
     {
         return $this->hasMany(Service::class);
