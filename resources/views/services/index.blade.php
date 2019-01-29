@@ -48,8 +48,8 @@
                                     <td>{{ $service->nome }}</td>
                                     <td>{{ $service->category->nome }}</td>
                                     <td>{{ $service->user->name }}</td>
-                                    <td>R$ {{ $service->preco }}</td>
-                                    <td>{{ $service->duracao ? \Carbon\Carbon::parse($service->duracao)->format('H:i') : null }}</td>
+                                    <td>{{ $service->preco ? 'R$' . $service->preco : '-' }}</td>
+                                    <td>{{ $service->duracao ? \Carbon\Carbon::parse($service->duracao)->format('H:i') : '-' }}</td>
                                     <td>
                                         <a href="/services/{{ $service->id }}" class="btn btn-primary" type="button" title="Visualizar">
                                             <i class="fa fa-eye"></i> 

@@ -15,6 +15,7 @@
                     <div class="content">
                         <form method="post" action="/rewards">
                             @csrf
+                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">

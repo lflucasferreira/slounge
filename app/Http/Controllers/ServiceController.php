@@ -7,7 +7,7 @@ use App\Models\Appointment;
 use App\Models\Category;
 use App\Models\Service;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\ServiceRequest;
 
 class ServiceController extends Controller
 {
@@ -51,10 +51,9 @@ class ServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ServiceRequest $request)
     {
-        $attributes = $this->validation();
-        $request = Service::create($attributes);
+        $request = Service::create($request->validated());
         Alert::success('Serviço cadastrado com sucesso!');
         return redirect('/services');
     }
@@ -90,9 +89,9 @@ class ServiceController extends Controller
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Service $service)
+    public function update(ServiceRequest $request, Service $service)
     {
-        $service->update($this->validation());
+        $service->update($request->validated());
         Alert::success('Serviço atualizado com sucesso!');
         return redirect()->route('services.show', $service->id);
     }
@@ -113,20 +112,5 @@ class ServiceController extends Controller
             Alert::success('Serviço excluído com sucesso!');
             return redirect('/services');
         }
-    }
-
-    public function validation()
-    {
-        return request()->validate([
-            'sku' => ['nullable'],
-            'nome' => ['required', 'min:3', 'max:50'],
-            'descricao' => ['nullable', 'min:3', 'max:50'],
-            'preco' => ['nullable'],
-            'duracao' => ['nullable'],
-            'inicio' => ['nullable'],
-            'fim' => ['nullable'],
-            'user_id' => ['required'],
-            'category_id' => ['required']
-        ]);
     }
 }
