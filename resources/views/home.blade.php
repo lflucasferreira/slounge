@@ -152,7 +152,7 @@
                         <div class="footer">
                             <hr>
                             <div class="stats">
-                                <i class="ti-pulse"></i> R$ 450,00 [R$ 56,25]
+                                {{-- <i class="ti-pulse"></i> R$ 450,00 [R$ 56,25] --}}
                             </div>
                         </div>
                     </div>

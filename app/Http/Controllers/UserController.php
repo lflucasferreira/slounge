@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Alert;
+use App\Models\Client;
 use App\Models\Reward;
 use App\Models\Service;
 use App\Models\User;
@@ -40,6 +41,17 @@ class UserController extends Controller
     public function create()
     {
         return view('users.create');
+    }
+
+    /**
+     * Show the form for creating a new resource from client.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createFromClient()
+    {
+        $client = Client::find(app('request')->client_id);
+        return view('users.create', compact('client'));
     }
 
     /**

@@ -48,7 +48,12 @@
                                     <td>
                                         <a href="/clients/{{ $client->id }}" class="btn btn-primary" type="button" title="Visualizar">
                                             <i class="fa fa-eye"></i> 
-                                        </a>
+                                        </a> 
+                                        @if(!$client->isUser())
+                                            <a href="{{ route('users.createFromClient', ['client_id' => $client->id]) }}" class="btn btn-warning" type="button" title="Transformar em Usuário">
+                                                <i class="fa fa-user"></i> 
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach

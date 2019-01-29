@@ -1,3 +1,5 @@
+{{-- {!! dd('na view', $client) !!} --}}
+
 @extends('layouts.template')
 
 @section('navtitle', 'Usuários')
@@ -19,13 +21,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Nome</label>
-                                        <input type="text" minLength="3" maxlength="255" class="form-control border-input  {{ $errors->has('name') ? 'is-invalid' : '' }}" name="name" value="{{ old('name')}}" required autofocus>
+                                        <input type="text" minLength="3" maxlength="255" class="form-control border-input  {{ $errors->has('name') ? 'is-invalid' : '' }}" name="name" value="{{ isset($client) ? $client->nome . ' ' . $client->sobrenome : old('name') }}" required autofocus>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Email</label>
-                                        <input type="email" minLength="3" maxlength="255" class="form-control border-input  {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email" value="{{ old('email')}}" required>
+                                        <input type="email" minLength="3" maxlength="255" class="form-control border-input  {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email" value="{{ isset($client) ? $client->email : old('email')}}" required>
                                     </div>
                                 </div>
                             </div>

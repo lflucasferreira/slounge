@@ -22,4 +22,9 @@ class Client extends Model
     {
         return $this->hasMany(Reward::class);
     }
+
+    public function isUser()
+    {
+        return User::where('email', $this->email)->first();
+    }
 }

@@ -1,4 +1,4 @@
-<div class="sidebar" data-background-color="black" data-active-color="danger">
+<div class="sidebar" data-background-color="black" data-active-color="warning">
 
 <!--
     Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
@@ -8,23 +8,23 @@
     <div class="sidebar-wrapper">
         <div class="logo">
             <a href="{{ route('home') }}" class="simple-text">
-                Lucas Ferreira
+                SLOUNGE
             </a>
         </div>
 
         <ul class="nav">
-            <li class="{{ isActiveRoute('home') }}">
+            {{-- <li class="{{ isActiveRoute('home') }}">
                 <a href="{{ url('/') }}">
                     <i class="ti-dashboard"></i>
                     <p>Dashboard</p>
                 </a>
-            </li>
-            <li class="{{ isActiveRoute('premiums.index') }}">
+            </li> --}}
+            {{-- <li class="{{ isActiveRoute('premiums.index') }}">
                 <a href="{{ url('/premiums') }}">
                     <i class="ti-star"></i>
                     <p>Premium</p>
                 </a>
-            </li>
+            </li> --}}
             <li class="{{ isActiveRoute('appointments.index') }}">
                 <a href="{{ url('/appointments') }}">
                     <i class="ti-calendar"></i>

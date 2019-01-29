@@ -14,6 +14,7 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('users/createFromClient/{client_id}', 'UserController@createFromClient')->name('users.createFromClient');
 Route::resource('appointments', 'AppointmentController');
 Route::resource('categories', 'CategoryController');
 Route::resource('clients', 'ClientController');
