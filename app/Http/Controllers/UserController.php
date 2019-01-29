@@ -6,7 +6,7 @@ use Alert;
 use App\Models\Reward;
 use App\Models\Service;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -48,11 +48,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $attributes = $this->validation();
-        $attributes['password'] = bcrypt('secret');
-        $request = User::create($attributes);
+        $request = User::create($request->validated());
         Alert::success('Usuário cadastrado com sucesso!');
         return redirect('/users');
     }
@@ -86,9 +84,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(User $user)
+    public function update(UserRequest $request, User $user)
     {
-        $user->update($this->validation());
+        $user->update($request->validated());
         Alert::success('Usuário atualizado com sucesso!');
         return redirect()->route('users.show', $user->id);
     }
@@ -109,13 +107,5 @@ class UserController extends Controller
             Alert::success('Usuário excluído com sucesso!');
             return redirect('/users');
         }
-    }
-
-    public function validation()
-    {
-        return request()->validate([
-            'name' => ['required', 'min:3', 'max:255'],
-            'email' => ['required', 'min:3', 'max:255']
-        ]);
     }
 }

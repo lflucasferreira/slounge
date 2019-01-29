@@ -6,7 +6,7 @@ use Alert;
 use App\Models\Client;
 use App\Models\Appointment;
 use App\Models\Reward;
-use Illuminate\Http\Request;
+use App\Http\Requests\ClientRequest;
 
 class ClientController extends Controller
 {
@@ -48,10 +48,9 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClientRequest $request)
     {
-        $attributes = $this->validationCreate();
-        $request = Client::create($attributes);
+        $request = Client::create($request->validated());
         Alert::success('Cliente cadastrado com sucesso!');
         return redirect('/clients');
     }
@@ -85,9 +84,9 @@ class ClientController extends Controller
      * @param  \App\Models\Client $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Client $client)
+    public function update(ClientRequest $request, Client $client)
     {
-        $client->update($this->validationUpdate());
+        $client->update($request->validated());
         Alert::success('Cliente atualizado com sucesso!');
         return redirect()->route('clients.show', $client->id);
     }
@@ -108,53 +107,5 @@ class ClientController extends Controller
             Alert::success('Cliente excluído com sucesso!');
             return redirect('/clients');
         }
-    }
-
-    public function validationCreate()
-    {
-        return request()->validate([
-            'nome' => ['required', 'min:3', 'max:255'],
-            'sobrenome' => ['required', 'min:3', 'max:255'],
-            'endereco' => ['nullable', 'max:255'],
-            'complemento' => ['nullable', 'max:255'],
-            'edificio' => ['nullable', 'max:255'],
-            'bairro' => ['nullable', 'max:255'],
-            'cidade' => ['nullable', 'max:255'],
-            'cep' => ['nullable', 'max:255'],
-            'estado' => ['nullable', 'max:255'],
-            'data_nascimento' => ['nullable', 'max:10'],
-            'email' => ['nullable', 'unique:clients', 'max:255'],
-            'status' => ['nullable', 'max:1'],
-            'telefone_fixo' => ['nullable', 'max:11'],
-            'telefone_celular' => ['nullable', 'max:11'],
-            'telefone_comercial' => ['nullable', 'max:11'],
-            'cpf' => ['nullable', 'unique:clients', 'max:11'],
-            'rg' => ['nullable', 'max:10'],
-            'orgao' => ['nullable', 'max:10']
-        ]);
-    }
-
-    public function validationUpdate()
-    {
-        return request()->validate([
-            'nome' => ['required', 'min:3', 'max:255'],
-            'sobrenome' => ['required', 'min:3', 'max:255'],
-            'endereco' => ['nullable', 'max:255'],
-            'complemento' => ['nullable', 'max:255'],
-            'edificio' => ['nullable', 'max:255'],
-            'bairro' => ['nullable', 'max:255'],
-            'cidade' => ['nullable', 'max:255'],
-            'cep' => ['nullable', 'max:255'],
-            'estado' => ['nullable', 'max:255'],
-            'data_nascimento' => ['nullable', 'max:10'],
-            'email' => ['nullable', 'exists:clients', 'max:255'],
-            'status' => ['nullable', 'max:1'],
-            'telefone_fixo' => ['nullable', 'max:11'],
-            'telefone_celular' => ['nullable', 'max:11'],
-            'telefone_comercial' => ['nullable', 'max:11'],
-            'cpf' => ['nullable', 'exists:clients', 'max:11'],
-            'rg' => ['nullable', 'max:10'],
-            'orgao' => ['nullable', 'max:10']
-        ]);
     }
 }

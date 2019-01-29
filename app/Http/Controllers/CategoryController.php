@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Alert;
 use App\Models\Category;
 use App\Models\Service;
-use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -47,10 +47,9 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        $attributes = $this->validationCreate();
-        $request = Category::create($attributes);
+        $request = Category::create($request->validated());
         Alert::success('Categoria cadastrada com sucesso!');
         return redirect('/categories');
     }
@@ -84,9 +83,9 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
-        $category->update($this->validationUpdate());
+        $category->update($request->validated());
         Alert::success('Categoria atualizada com sucesso!');
         return redirect()->route('categories.show', $category->id);
     }
@@ -99,7 +98,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        if(Service::where('category_id', '=', $category->id)->first()){
+        if (Service::where('category_id', '=', $category->id)->first()) {
             Alert::error('A categoria não pôde ser excluída!');
             return redirect()->route('categories.show', $category->id);
         } else {
@@ -107,23 +106,5 @@ class CategoryController extends Controller
             Alert::success('Categoria excluída com sucesso!');
             return redirect('/categories');
         }
-    }
-
-    public function validationCreate()
-    {
-        return request()->validate([
-            'nome' => ['required', 'unique:categories', 'min:3', 'max:255'],
-            'status' => ['required']
-        ]);
-
-    }
-
-    public function validationUpdate()
-    {
-        return request()->validate([
-            'nome' => ['required', 'exists:categories', 'min:3', 'max:255'],
-            'status' => ['required']
-        ]);
-
     }
 }

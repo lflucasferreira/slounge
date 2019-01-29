@@ -16,6 +16,7 @@
                         <form method="post" action="/categories/{{ $category->id }}">
                             @method('PATCH')   
                             @csrf
+                            <input type="hidden" name="id" value="{{ $category->id }}">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">

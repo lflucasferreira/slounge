@@ -16,6 +16,7 @@
                         <form method="post" action="/coupons/{{ $coupon->id }}">
                             @method('PATCH')   
                             @csrf
+                            <input type="hidden" name="id" value="{{ $coupon->id }}">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">

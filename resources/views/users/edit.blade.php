@@ -16,6 +16,7 @@
                         <form method="post" action="/users/{{ $user->id }}">
                             @method('PATCH')   
                             @csrf
+                            <input type="hidden" name="id" value="{{ $user->id }}">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">

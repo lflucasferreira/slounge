@@ -16,6 +16,7 @@
                         <form method="post" action="/rewards/{{ $reward->id }}">
                             @method('PATCH')   
                             @csrf
+                            <input type="hidden" name="id" value="{{ $reward->id }}">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
