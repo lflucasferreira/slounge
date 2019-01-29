@@ -7,7 +7,7 @@ use App\Models\Client;
 use App\Models\Coupon;
 use App\Models\Reward;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\CouponRequest;
 
 class CouponController extends Controller
 {
@@ -51,9 +51,9 @@ class CouponController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CouponRequest $request)
     {
-        $request = Coupon::create($this->validation());
+        $request = Coupon::create($request->validated());
         Alert::success('O cupom foi cadastrado com sucesso!');
         return redirect('/coupons');
     }
@@ -89,9 +89,9 @@ class CouponController extends Controller
      * @param  \App\Models\Coupon  $coupon
      * @return \Illuminate\Http\Response
      */
-    public function update(Coupon $coupon)
+    public function update(CouponRequest $request, Coupon $coupon)
     {
-        $coupon->update($this->validation());
+        $coupon->update($request->validated());
         Alert::success('O cupom foi atualizado com sucesso!');
         return redirect()->route('coupons.show', $coupon->id);
     }
@@ -107,20 +107,5 @@ class CouponController extends Controller
         $coupon->delete();
         Alert::success('O cupom foi excluído com sucesso!');
         return redirect('/coupons');
-    }
-
-    public function validation()
-    {
-        return request()->validate([
-            'client_id' => ['required'],
-            'user_id' => ['required'],
-            'descricao' => ['nullable'],
-            'codigo' => ['required'],
-            'pontos' => ['nullable'],
-            'valor' => ['nullable'],
-            'validade' => ['nullable'],
-            'status' => ['required'],
-            'aplicado' => ['required'],
-        ]);
     }
 }

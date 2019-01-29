@@ -7,7 +7,7 @@ use App\Models\Appointment;
 use App\Models\Client;
 use App\Models\Reward;
 use App\Models\Service;
-use Illuminate\Http\Request;
+use App\Http\Requests\AppointmentRequest;
 use Illuminate\Support\Carbon;
 
 class AppointmentController extends Controller
@@ -52,9 +52,9 @@ class AppointmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AppointmentRequest $request)
     {
-        $request = Appointment::create($this->attributes());
+        $request = Appointment::create($this->attributes($request));
         Alert::success('O compromisso foi cadastrado com sucesso!');
         return redirect('/appointments');
     }
@@ -90,9 +90,9 @@ class AppointmentController extends Controller
      * @param  \App\Models\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function update(Appointment $appointment)
+    public function update(AppointmentRequest $request, Appointment $appointment)
     {
-        $appointment->update($this->attributes());
+        $appointment->update($this->attributes($request));
         Alert::success('O compromisso foi atualizado com sucesso!');
         return redirect()->route('appointments.show', $appointment->id);
     }
@@ -115,23 +115,9 @@ class AppointmentController extends Controller
         }
     }
 
-    public function validation()
+    public function attributes(AppointmentRequest $request)
     {
-        return request()->validate([
-            'client_id' => ['required'],
-            'service_id' => ['required'],
-            'data' => ['required'],
-            'inicio' => ['required', 'date_format:H:i'],
-            'fim' => ['required', 'date_format:H:i', 'after:inicio'],
-            'preco' => ['required'],
-            'situacao' => ['required'],
-            'observacao' => ['nullable']
-        ]);
-    }
-
-    public function attributes()
-    {
-        $attributes = $this->validation();
+        $attributes = $request->validated();
         $attributes['inicio'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['inicio'] . ":00"));
         $attributes['fim'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['fim'] . ":00"));
         return $attributes;
