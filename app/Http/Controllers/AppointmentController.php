@@ -9,6 +9,7 @@ use App\Models\Reward;
 use App\Models\Service;
 use App\Http\Requests\AppointmentRequest;
 use Illuminate\Support\Carbon;
+use App\Notifications\AppointmentCreated;
 
 class AppointmentController extends Controller
 {
@@ -21,7 +22,7 @@ class AppointmentController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -56,6 +57,8 @@ class AppointmentController extends Controller
     {
         $request = Appointment::create($this->attributes($request));
         Alert::success('O compromisso foi cadastrado com sucesso!');
+        $client = Client::find($request->client_id);
+        $client->notify(new AppointmentCreated($request));
         return redirect('/appointments');
     }
 
@@ -118,8 +121,8 @@ class AppointmentController extends Controller
     public function attributes(AppointmentRequest $request)
     {
         $attributes = $request->validated();
-        $attributes['inicio'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['inicio'] . ":00"));
-        $attributes['fim'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['fim'] . ":00"));
+        $attributes['inicio'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['inicio'] . ':00'));
+        $attributes['fim'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['fim'] . ':00'));
         return $attributes;
     }
 }
