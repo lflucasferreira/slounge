@@ -12,9 +12,9 @@ class Client extends Model
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    protected $dispatchesEvents = [
-        'created' => ClientCreated::class
-    ];
+    // protected $dispatchesEvents = [
+    //     'created' => ClientCreated::class
+    // ];
 
     public function appointments()
     {

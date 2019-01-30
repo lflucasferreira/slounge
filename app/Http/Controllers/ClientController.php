@@ -7,6 +7,7 @@ use App\Models\Client;
 use App\Models\Appointment;
 use App\Models\Reward;
 use App\Http\Requests\ClientRequest;
+use App\Notifications\ClientCreatedSuccessfully;
 
 class ClientController extends Controller
 {
@@ -52,6 +53,8 @@ class ClientController extends Controller
     {
         $request = Client::create($request->validated());
         Alert::success('Cliente cadastrado com sucesso!');
+        $client = Client::where('email', $request->email)->first();
+        $client->notify(new ClientCreatedSuccessfully($request));
         return redirect('/clients');
     }
 
