@@ -10,6 +10,7 @@ use App\Models\Service;
 use App\Http\Requests\AppointmentRequest;
 use Illuminate\Support\Carbon;
 use App\Notifications\AppointmentCreated;
+use App\Notifications\AppointmentCanceled;
 
 class AppointmentController extends Controller
 {
@@ -102,7 +103,11 @@ class AppointmentController extends Controller
     public function update(AppointmentRequest $request, Appointment $appointment)
     {
         $appointment->update($this->attributes($request));
-        if (!is_null($appointment['canceled']) && $appointment['canceled'] == 1) {
+        dd($appointment);
+        if (count($request) <= 3) {
+            $client = Client::find($request->client_id);
+           
+           // $client->notify(new AppointmentCanceled($request));
             Alert::success('O compromisso foi cancelado com sucesso!');
             return redirect('/');
         } else {
