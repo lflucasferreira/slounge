@@ -2,26 +2,23 @@
 
 namespace App\Notifications;
 
-use App\Models\Client;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\MailMessage;
 
-class ClientCreatedSuccessfully extends Notification implements ShouldQueue
+class CouponApplied extends Notification
 {
     use Queueable;
-
-    private $client;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Client $request)
+    public function __construct()
     {
-        $this->client = $request;
+        //
     }
 
     /**
@@ -32,7 +29,7 @@ class ClientCreatedSuccessfully extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
+        return ['mail'];
     }
 
     /**
@@ -43,12 +40,7 @@ class ClientCreatedSuccessfully extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        $name = config('app.name');
-        return (new MailMessage)
-                    ->subject('Your account was created on ' . $name)
-                    ->line('Welcome to ' . $name . ' system.')
-                    ->action('Click here to login', route('clients.show', $this->client->id))
-                    ->line('Feel free to contact us!');
+        return (new MailMessage)->markdown('mail.coupon.applied');
     }
 
     /**
@@ -60,8 +52,7 @@ class ClientCreatedSuccessfully extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'message' => 'A new record was created on Client table',
-            'action' => route('clients.show', $this->client->id)
+            //
         ];
     }
 }
