@@ -9,7 +9,7 @@ Valor: **R$ {{ $appointment->preco }}**. <br/>
 Status: **{{ $appointment->situacao }}**. <br/>
 Observação: **{{ $appointment->observacao ? $appointment->observacao : 'Nenhuma' }}**.
 
-Caso queira cancelar o compromisso, clique no botão **Cancelar** abaixo.
+Caso queira cancelar o compromisso, clique no botão **Cancelar Compromisso** abaixo.
 
 @component('mail::button', ['url' => "$path/appointments/$appointment->id/cancel"])
 Cancelar Compromisso
