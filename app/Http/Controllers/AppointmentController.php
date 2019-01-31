@@ -47,6 +47,12 @@ class AppointmentController extends Controller
         return view('appointments.create', compact('clients', 'services'));
     }
 
+    public function cancel()
+    {
+        $appointment = Appointment::find(app('request')->id);
+        return view('appointments.cancel', compact('appointment'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -96,8 +102,13 @@ class AppointmentController extends Controller
     public function update(AppointmentRequest $request, Appointment $appointment)
     {
         $appointment->update($this->attributes($request));
-        Alert::success('O compromisso foi atualizado com sucesso!');
-        return redirect()->route('appointments.show', $appointment->id);
+        if (!is_null($appointment['canceled']) && $appointment['canceled'] == 1) {
+            Alert::success('O compromisso foi cancelado com sucesso!');
+            return redirect('/');
+        } else {
+            Alert::success('O compromisso foi atualizado com sucesso!');
+            return redirect()->route('appointments.show', $appointment->id);
+        }
     }
 
     /**
@@ -121,8 +132,10 @@ class AppointmentController extends Controller
     public function attributes(AppointmentRequest $request)
     {
         $attributes = $request->validated();
-        $attributes['inicio'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['inicio'] . ':00'));
-        $attributes['fim'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['fim'] . ':00'));
+        if (!array_key_exists('canceled', $attributes) && count($attributes) > 3) {
+            $attributes['inicio'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['inicio'] . ':00'));
+            $attributes['fim'] = Carbon::createFromTimestamp(strtotime($attributes['data'] . $attributes['fim'] . ':00'));
+        }
         return $attributes;
     }
 }

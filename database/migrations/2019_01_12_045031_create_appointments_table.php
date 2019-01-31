@@ -24,6 +24,7 @@ class CreateAppointmentsTable extends Migration
             $table->unsignedInteger('service_id');
             $table->boolean('status')->default(true); // 1 (true) para quando estiver ativo | 0 (false) para quando estiver inativo
             $table->string('situacao')->default('agendado'); // Opções disponíveis: agendado | cancelado | concluido | confirmado | reagendado
+            $table->datetime('email_sent')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

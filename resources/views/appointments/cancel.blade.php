@@ -13,8 +13,11 @@
                     </div>
                     <div class="content">
                         <form method="post" action="/appointments/{{ $appointment->id }}">
-                            @method('DELETE')
+                            @method('PATCH')
                             @csrf
+                            <input type="hidden" name="situacao" value="Cancelado">
+                            <input type="hidden" name="status" value="0">
+                            <input type="hidden" name="canceled" value="1">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -77,16 +80,7 @@
                                 </a>
                             </div>
                             <div class="pull-right">
-                                <button type="submit" class="btn btn-info btn-fill">Excluir <i class="fa fa-trash"></i></button>
-                                
-                                @if ($appointment->situacao != "Cancelado" && $appointment->situacao != "Concluído")
-                                <a href="/appointments/{{ $appointment->id }}/cancel" class="btn btn-warning btn-fill" type="button">
-                                    Cancelar Compromisso <i class="fa fa-exclamation-triangle"></i>
-                                </a>
-                                @endif
-                                <a href="/appointments/{{ $appointment->id }}/edit" class="btn btn-danger btn-fill" type="button">
-                                    Editar <i class="fa fa-edit"></i>
-                                </a>
+                                <button type="submit" class="btn btn-danger btn-fill">Cancelar Compromisso <i class="fa fa-exclamation-triangle"></i></button>
                             </div>
                             <div class="clearfix"></div>
                         </form>

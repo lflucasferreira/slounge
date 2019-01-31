@@ -23,16 +23,24 @@ class AppointmentRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'client_id' => ['required'],
-            'service_id' => ['required'],
-            'data' => ['required'],
-            'inicio' => ['required', 'date_format:H:i'],
-            'fim' => ['required', 'date_format:H:i', 'after:inicio'],
-            'preco' => ['required', 'numeric'],
-            'situacao' => ['required'],
-            'observacao' => ['nullable']
-        ];
+        // Check Create, Update or Cancel
+        if ($this->method() == 'PATCH' && !is_null($this->get('canceled'))) {
+            return [
+                'status' => ['required'],
+                'situacao' => ['required']
+            ];
+        } else { 
+            return [
+                'client_id' => ['required'],
+                'service_id' => ['required'],
+                'data' => ['required'],
+                'inicio' => ['required', 'date_format:H:i'],
+                'fim' => ['required', 'date_format:H:i', 'after:inicio'],
+                'preco' => ['required', 'numeric'],
+                'situacao' => ['required'],
+                'observacao' => ['nullable']
+            ];
+        }
     }
 
     /**
@@ -48,6 +56,7 @@ class AppointmentRequest extends FormRequest
             'data.required' => 'A data é obrigatória.',
             'inicio.required' => 'A hora de início é obrigatória.',
             'fim.required' => 'A hora de término é obrigatória.',
+            'preco.required' => 'O preço do compromisso é obrigatório.',
             'situacao.required' => 'A situação é obrigatória.',
             'fim.after' => 'A hora de término deve ser após a hora de início.'
         ];

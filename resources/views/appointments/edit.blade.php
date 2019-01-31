@@ -71,11 +71,11 @@
                                         <label>Situação</label>
                                         <select class="form-control border-input {{ $errors->has('situacao') ? 'is-invalid' : '' }}" name="situacao" required>
                                             <option value="" hidden>Selecionar</option>
-                                            <option value="agendado" @if( old('situacao', $appointment->situacao) == 'agendado' ) selected @endif>Agendado</option>
-                                            <option value="cancelado" @if( old('situacao', $appointment->situacao) == 'cancelado' ) selected @endif>Cancelado</option>
-                                            <option value="concluido" @if( old('situacao', $appointment->situacao) == 'concluido' ) selected @endif>Concluído</option>
-                                            <option value="confirmado" @if( old('situacao', $appointment->situacao) == 'confirmado' ) selected @endif>Confirmado</option>
-                                            <option value="reagendado" @if( old('situacao', $appointment->situacao) == 'reagendado' ) selected @endif>Reagendado</option>
+                                            <option value="Agendado" @if( old('situacao', $appointment->situacao) == 'Agendado' ) selected @endif>Agendado</option>
+                                            <option value="Cancelado" @if( old('situacao', $appointment->situacao) == 'Cancelado' ) selected @endif>Cancelado</option>
+                                            <option value="Concluído" @if( old('situacao', $appointment->situacao) == 'Concluído' ) selected @endif>Concluído</option>
+                                            <option value="Confirmado" @if( old('situacao', $appointment->situacao) == 'Confirmado' ) selected @endif>Confirmado</option>
+                                            <option value="Reagendado" @if( old('situacao', $appointment->situacao) == 'Reagendado' ) selected @endif>Reagendado</option>
                                         </select>
                                     </div>
                                 </div>

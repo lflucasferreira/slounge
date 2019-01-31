@@ -11,7 +11,7 @@ Observação: **{{ $appointment->observacao ? $appointment->observacao : 'Nenhum
 
 Caso queira cancelar o compromisso, clique no botão Cancelar abaixo.
 
-@component('mail::button', ['url' => "/appointments/$appointment->id/cancel"])
+@component('mail::button', ['url' => "$path/appointments/$appointment->id/cancel"])
 Cancelar Compromisso
 @endcomponent
 

@@ -10,6 +10,7 @@ $factory->define(App\Models\Appointment::class, function (Faker $faker) {
         'data' => $faker->date($format = 'Y-m-d', $max = 'now'),
         'inicio' => $faker->date($format = 'Y-m-d H:i:s', $max = 'now'),
         'fim' => $faker->date($format = 'Y-m-d H:i:s', $max = 'now'),
+        'situacao' => $faker->randomElement($array = array ('Agendado','Cancelado','Concluído', 'Confirmado', 'Reagendado')),
         'observacao' => $faker->text(50),
         'client_id' => function () {
             return factory(Client::class)->create()->id;

@@ -44,11 +44,12 @@ class AppointmentCreated extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         $name = config('app.name');
+        $path = config('app.url');
         $sender = 'contact@example.com';
         $appointment = $this->appointment;
         return (new MailMessage)->from($sender)
                                 ->subject($name . ' | Um novo compromisso foi criado.')
-                                ->markdown('mail.appointment.created', compact('appointment'));
+                                ->markdown('mail.appointment.created', compact('appointment', 'path'));
     }
 
     /**
