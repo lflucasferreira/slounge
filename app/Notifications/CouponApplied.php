@@ -2,13 +2,14 @@
 
 namespace App\Notifications;
 
+use App\Models\Appointment;
 use App\Models\Coupon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class CouponApplied extends Notification
+class CouponApplied extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -17,8 +18,9 @@ class CouponApplied extends Notification
      *
      * @return void
      */
-    public function __construct(Coupon $coupon)
+    public function __construct(Appointment $appointment, Coupon $coupon)
     {
+        $this->appointment = $appointment;
         $this->coupon = $coupon;
     }
 
@@ -41,7 +43,14 @@ class CouponApplied extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.coupon.applied');
+        $name = config('app.name');
+        $path = config('app.url');
+        $sender = config('mail.from.address');
+        $appointment = $this->appointment;
+        $coupon = $this->coupon;
+        return (new MailMessage)->from($sender)
+            ->subject($name . ' | Seu cupom foi utilizado para o atendimento do dia ' . $this->coupon->appointment->data->format('d/m/Y'))
+            ->markdown('mail.coupon.applied', compact('appointment', 'coupon', 'path'));
     }
 
     /**

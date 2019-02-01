@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Appointment;
-use App\Models\User;
 
 class Coupon extends Model
 {
@@ -15,6 +13,11 @@ class Coupon extends Model
     protected $dates = [
         'validade'
     ];
+
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
+    }
 
     public function client()
     {

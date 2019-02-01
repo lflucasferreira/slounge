@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class RewardExpiration extends Notification
+class RewardExpiration extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -46,7 +46,7 @@ class RewardExpiration extends Notification
         $sender = config('mail.from.address');
         $reward = $this->reward;
         return (new MailMessage)->from($sender)
-            ->subject($name . ' | Você tem pontos expirando em ' . $this->reward->data->format('d/m/Y'))
+            ->subject($name . ' | Você tem pontos expirando em ' . $this->reward->validade->format('d/m/Y'))
             ->markdown('mail.reward.expiration', compact('reward', 'path'));
     }
 
@@ -59,7 +59,7 @@ class RewardExpiration extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => 'Pontos a expirar em ' . $this->reward->date->format('m/d/Y') . ': ' . $this->reward->pontos,
+            'message' => 'Pontos a expirar em ' . $this->reward->validade->format('m/d/Y') . ': ' . $this->reward->pontos,
             'action' => route('rewards.show', $this->reward->id)
         ];
     }

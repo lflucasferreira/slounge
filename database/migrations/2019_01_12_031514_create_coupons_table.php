@@ -25,6 +25,7 @@ class CreateCouponsTable extends Migration
             $table->boolean('status')->default(true);
             $table->boolean('aplicado')->default(false);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('client_id')->references('id')->on('clients')->onUpdate('cascade')->onDelete('restrict');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('restrict');

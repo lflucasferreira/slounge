@@ -48,7 +48,7 @@ class AppointmentCreated extends Notification implements ShouldQueue
         $sender = config('mail.from.address');
         $appointment = $this->appointment;
         return (new MailMessage)->from($sender)
-            ->subject($name . ' | Você tem um compromisso agendado para ' . $this->appointment->data->format('d/m/Y'))
+            ->subject($name . ' | Você tem um novo compromisso em ' . $this->appointment->data->format('d/m/Y'))
             ->markdown('mail.appointment.created', compact('appointment', 'path'));
     }
 

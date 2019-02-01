@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class AppointmentReceipt extends Notification
+class AppointmentReceipt extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -41,7 +41,13 @@ class AppointmentReceipt extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.appointment.receipt');
+        $name = config('app.name');
+        $path = config('app.url');
+        $sender = config('mail.from.address');
+        $appointment = $this->appointment;
+        return (new MailMessage)->from($sender)
+            ->subject($name . ' | Recibo do atendimento realizado em ' . $this->appointment->data->format('d/m/Y'))
+            ->markdown('mail.appointment.receipt', compact('appointment', 'path'));
     }
 
     /**
@@ -53,7 +59,7 @@ class AppointmentReceipt extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => 'O compromisso do dia ' . $this->appointment->date->format('m/d/Y') . ' foi cancelado.',
+            'message' => 'Você recebeu um recibo do atendimento realizado em ' . $this->appointment->data->format('m/d/Y'),
             'action' => route('appointments.show', $this->appointment->id)
         ];
     }

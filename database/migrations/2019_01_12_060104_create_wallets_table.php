@@ -27,6 +27,7 @@ class CreateWalletsTable extends Migration
             $table->unsignedInteger('coupon_id')->nullable();
             $table->unsignedInteger('from_wallet_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('appointment_id')->references('id')->on('appointments')->onUpdate('cascade')->onDelete('restrict');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('restrict');
