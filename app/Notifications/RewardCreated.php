@@ -53,7 +53,7 @@ class RewardCreated extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'message' => 'O compromisso do dia ' . $this->reward->date->format('m/d/Y') . ' foi cancelado.',
+            'message' => 'O compromisso do dia ' . $this->reward->validade->format('m/d/Y') . ' foi cancelado.',
             'action' => route('rewards.show', $this->reward->id)
         ];
     }
