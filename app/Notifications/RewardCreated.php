@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\Reward;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -16,9 +17,9 @@ class RewardCreated extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Reward $reward)
     {
-        //
+        $this->reward = $reward;
     }
 
     /**
@@ -29,7 +30,7 @@ class RewardCreated extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -52,7 +53,8 @@ class RewardCreated extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'message' => 'O compromisso do dia ' . $this->reward->date->format('m/d/Y') . ' foi cancelado.',
+            'action' => route('rewards.show', $this->reward->id)
         ];
     }
 }

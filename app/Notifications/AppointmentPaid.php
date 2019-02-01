@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\Appointment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -16,9 +17,9 @@ class AppointmentPaid extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Appointment $appointment)
     {
-        //
+        $this->appointment = $appointment;
     }
 
     /**
@@ -29,7 +30,7 @@ class AppointmentPaid extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -40,7 +41,13 @@ class AppointmentPaid extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.appointment.paid');
+        $name = config('app.name');
+        $path = config('app.url');
+        $sender = config('mail.from.address');
+        $appointment = $this->appointment;
+        return (new MailMessage)->from($sender)
+            ->subject($name . ' | O compromisso do dia ' . $this->appointment->data->format('d/m/Y') . ' foi marcado como pago')
+            ->markdown('mail.appointment.paid', compact('appointment', 'path'));
     }
 
     /**
@@ -52,7 +59,8 @@ class AppointmentPaid extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'message' => 'O compromisso do dia ' . $this->appointment->date->format('m/d/Y') . ' foi cancelado.',
+            'action' => route('appointments.show', $this->appointment->id)
         ];
     }
 }

@@ -1,12 +1,20 @@
 @component('mail::message')
-# Introduction
+Olá {{ $appointment->client->nome }},
 
-The body of your message.
+Você está recebendo o recibo referente ao atendimento realizado em **{{ $appointment->data->format('d/m/Y') }}**.
 
-@component('mail::button', ['url' => ''])
-Button Text
+### Detalhes
+Serviço: **{{ $appointment->service->nome }}**. <br/>
+Data: **{{ $appointment->data->format('d/m/Y') }}** das **{{ $appointment->inicio->format('H:i') }}** às **{{ $appointment->fim->format('H:i') }}**. <br/> 
+Valor: **R$ {{ $appointment->preco }}**. <br/>
+Saldo: **{{ $appointment->situacao }}**. <br/>
+
+Clique no botão abaixo para visualizá-lo.
+
+@component('mail::button', ['url' => "$path/appointments/$appointment->id/printReceipt"])
+Baixar Recibo
 @endcomponent
 
-Thanks,<br>
+Obrigado,<br>
 {{ config('app.name') }}
 @endcomponent

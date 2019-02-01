@@ -12,7 +12,7 @@ Observação: **{{ $appointment->observacao ? $appointment->observacao : 'Nenhum
 
 Caso queira reagendar este compromisso, clique no botão **Reagendar Compromisso** abaixo.
 
-@component('mail::button', ['url' => "$path/appointments/$appointment->id/cancel"])
+@component('mail::button', ['url' => "$path/appointments/$appointment->id/reschedule"])
 Reagendar Compromisso
 @endcomponent
 

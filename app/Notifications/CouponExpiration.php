@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\Coupon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -16,9 +17,9 @@ class CouponExpiration extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Coupon $coupon)
     {
-        //
+        $this->coupon = $coupon;
     }
 
     /**
@@ -29,7 +30,7 @@ class CouponExpiration extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -52,7 +53,8 @@ class CouponExpiration extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'message' => 'O compromisso do dia ' . $this->coupon->date->format('m/d/Y') . ' foi cancelado.',
+            'action' => route('coupons.show', $this->coupon->id)
         ];
     }
 }

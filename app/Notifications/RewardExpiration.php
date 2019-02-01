@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use app\Models\Reward;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -16,9 +17,9 @@ class RewardExpiration extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Reward $reward)
     {
-        //
+        $this->reward = $reward;
     }
 
     /**
@@ -29,7 +30,7 @@ class RewardExpiration extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -40,7 +41,13 @@ class RewardExpiration extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.reward.expiration');
+        $name = config('app.name');
+        $path = config('app.url');
+        $sender = config('mail.from.address');
+        $reward = $this->reward;
+        return (new MailMessage)->from($sender)
+            ->subject($name . ' | Você tem pontos expirando em ' . $this->reward->data->format('d/m/Y'))
+            ->markdown('mail.reward.expiration', compact('reward', 'path'));
     }
 
     /**
@@ -52,7 +59,8 @@ class RewardExpiration extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'message' => 'Pontos a expirar em ' . $this->reward->date->format('m/d/Y') . ': ' . $this->reward->pontos,
+            'action' => route('rewards.show', $this->reward->id)
         ];
     }
 }
